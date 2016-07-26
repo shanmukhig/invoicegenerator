@@ -1,0 +1,110 @@
+﻿@font-face {
+    src: url('../fonts/Imprima-Regular.ttf') format(truetype);
+    font-family: "Imprima"
+}
+
+body {
+    font-family: "Imprima";
+    padding: 20px;
+    font-size: 15px;
+}
+
+.container {
+    width: 100%;
+}
+
+
+/* Set padding to keep content from hitting the edges */
+
+.body-content {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+/* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column
+*/
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+
+/*input,
+select,
+textarea {
+  max-width: 280px;
+}*/
+
+.search-width {
+    max-width: 300px;
+}
+
+select option:empty {
+    display: none;
+}
+
+.middle {
+    margin-top: 5px;
+}
+
+.popover {
+    max-width: 400px;
+    padding: 1px;
+    text-align: left;
+    white-space: normal;
+    background-color: #000000;
+    border: 1px solid #000000;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    background-clip: padding-box;
+    color: #FFFFFF;
+    font-size: 12px;
+}
+
+.popover.right .arrow:after {
+    border-right-color: #000000;
+}
+
+.popover.top .arrow:after {
+    border-top-color: #000000;
+}
+
+.popover.bottom .arrow:after {
+    border-bottom-color: #000000;
+}
+
+.sortable {
+    cursor: pointer;
+}
+
+.div-input {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.fa-15x {
+    font-size: 1.7em;
+}
+
+.modal-xlg {
+    width: 850px
+}
+
+.thumb {
+    width: 140px;
+    height: 40px;
+    float: none;
+    position: relative;
+    top: 7px;
+}
+
+label {
+    margin-top: 10px;
+}

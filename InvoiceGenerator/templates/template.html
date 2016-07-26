@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+</head>
+<body>
+  <div class="row">
+    <div class="pull-right">
+      <img src="{0}" alt="" class="img" /> <!--company logo-->
+    </div>
+  </div>
+  <div class="row">
+    <div class="text-center">
+      <span class="txt txtl txtg">Invoice</span>
+    </div>
+  </div>
+  <div class="rbc rbb"></div>
+  <div class="row">
+    <div class="pull-left">
+      <span class="txt txtl txtg">Your Monthly Bill</span>
+    </div>
+    <div class="pull-right">Period: <span class="txt txtl txtb">{1} to {2}</span></div> <!--from and to date-->
+  </div>
+  <div class="row">
+    <div class="col-p-6">
+      <div class="rbc rbnb160 rb3">
+        <div class="row pdl">
+          <div class="col-p-12 pdtb">
+            <span class="txt txtb">{3}</span>
+          </div> <!--customer name-->
+        </div>
+        <div class="row pdl">
+          <div class="col-p-12 pdtb">
+            <span class="txt txtb">{4}</span>
+          </div> <!--customer address 1-->
+        </div>
+        <div class="row pdl">
+          <div class="col-p-12 pdtb">
+            <span class="txt txtb">{5}</span>
+          </div> <!--customer address 2-->
+        </div>
+        <div class="row pdl">
+          <div class="col-p-12 pdtb">
+            <span class="txt txtb">{6}-{8}, {7}</span>
+          </div> <!--customer city-->
+        </div>
+        <div class="row pdl">
+          <div class="col-p-12 pdtb">
+            <span class="txt txtb">{9}</span>
+          </div><!--customer phone-->
+        </div>
+        <div class="row pdl">
+          <div class="col-p-12 pdtb"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-p-3">
+      <div class="rbc rbnb160 rb3">
+        <div class="row pdtb">
+          <div class="col-p-12 text-center">
+            <span class="txt txtg txtl">Total Due</span>
+          </div>
+        </div>
+        <div class="rbc rbb"></div><br /><br />
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtb txtl"><i class="fa fa-{37}"></i>{10}</span>
+          </div> <!--invoice.TotalDue.ToString("C")-->
+        </div>
+      </div>
+    </div>
+    <div class="col-p-3">
+      <div class="rbc rbnb160 rb3">
+        <div class="row pdtb">
+          <div class="col-p-12 text-center">
+            <span class="txt txtg txtl">Due Date</span><br />
+          </div>
+        </div>
+        <div class="rbc rbb"></div><br /><br />
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtb txtl">{11}</span>
+          </div> <!--invoice.DueDate.ToString("D")-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-p-12">
+      <div class="rbc rbnb140 rb3">
+        <div class="row pdl pdtb">
+          <div class="col-p-4">
+            <span class="txt txtg">Invoice Number.:</span>
+          </div>
+          <div class="col-p-6">
+            <span class="txt txtb">{12}</span>
+          </div> <!--invoice.InvoiceNumber-->
+        </div>
+        <div class="row pdl pdtb">
+          <div class="col-p-4">
+            <span class="txt txtg">Bill Date:</span>
+          </div>
+          <div class="col-p-6">
+            <span class="txt txtb">{13}</span>
+          </div> <!--invoice.BillDate.ToString("D")-->
+        </div>
+        <div class="row pdl pdtb">
+          <div class="col-p-4">
+            <span class="txt txtg">Service Tax Number.:</span>
+          </div>
+          <div class="col-p-6">
+            <span class="txt txtb">{14}</span>
+          </div> <!--company.STN-->
+        </div>
+        <div class="row pdl pdtb">
+          <div class="col-p-4">
+            <span class="txt txtg">PAN Number:</span>
+          </div>
+          <div class="col-p-6">
+            <span class="txt txtb">{15}</span>
+          </div> <!--company.PAN-->
+        </div>
+        <div class="row pdl pdtb">
+          <div class="col-p-4">
+            <span class="txt txtg">TIN Number:</span>
+          </div>
+          <div class="col-p-6">
+            <span class="txt txtb">{16}</span>
+          </div> <!--company.TIN-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-p-25">
+      <div class="rbc rbnbs rb3 pdt">
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtg">Previous Bill Amount<br />(A)</span><br />
+          </div>
+        </div>
+        <div class="rbc rbb"></div><br />
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtb"><i class="fa fa-{37}"></i>{17}</span>
+          </div> <!--invoice.PreviousAmt.ToString("C")-->
+        </div>
+      </div>
+    </div>
+    <div class="col-p-25">
+      <div class="rbc rbnbs rb3 pdt">
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtg">Payments <br />(B)</span><br />
+          </div>
+        </div>
+        <div class="rbc rbb"></div><br />
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtb"><i class="fa fa-{37}"></i>{18}</span>
+          </div> <!--invoice.PreviousPayment.ToString("C")-->
+        </div>
+      </div>
+    </div>
+    <div class="col-p-25">
+      <div class="rbc rbnbs rb3 pdt">
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtg">Adjustments<br />(C)</span><br />
+          </div>
+        </div>
+        <div class="rbc rbb"></div><br />
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtb"><i class="fa fa-{37}"></i>{19}</span>
+          </div> <!--invoice.Adjustments.ToString("C")-->
+        </div>
+      </div>
+    </div>
+    <div class="col-p-25">
+      <div class="rbc rbnbs rb3 pdt">
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtg">Current Charges<br />(D)</span><br />
+          </div>
+        </div>
+        <div class="rbc rbb"></div><br />
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtb"><i class="fa fa-{37}"></i>{20}</span>
+          </div> <!--invoice.CurrentCharges.ToString("C")-->
+        </div>
+      </div>
+    </div>
+    <div class="col-p-25">
+      <div class="rbc rbnbs rb3 pdt">
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtg">Total Amount<br />Due (A-B+C+D)</span><br />
+          </div>
+        </div>
+        <div class="rbc rbb"></div><br />
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtb"><i class="fa fa-{37}"></i>{10}</span>
+          </div> <!--invoice.TotalDue.ToString("C")-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-p-12">
+      <div class="rbc rbnb160 rb3 pdt">
+        <div class="row">
+          <div class="col-p-12 text-center">
+            <span class="txt txtg txtl">Summary of Charges</span><br />
+          </div>
+        </div>
+        <div class="rbc rbb"></div>
+        <div class="row">
+          <div class="col-p-6 pdtb">
+            <span class="txt txtg">Particulars</span>
+          </div>
+          <div class="col-p-25 pdtb">
+            <span class="txt txtg nm nml">Amount</span>
+          </div>
+          <div class="col-p-25 pdtb">
+            <span class="txt txtg nm nml">Amount</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-p-6 pdl pdtb">
+            <span class="txt txtg">Balance Carry Forwarded (A-B+C)</span>
+          </div>
+          <div class="col-p-25">
+            <span></span>
+          </div>
+          <div class="col-p-25 pdtb pdtb">
+            <span class="txt txtb nm nml"><i class="fa fa-{37}"></i>{21}</span>
+          </div> <!--invoice.BalanceCarryForward.ToString("C")-->
+        </div>
+        <div class="row">
+          <div class="col-p-12 pdtb">
+            <span class="txt txtg">Current Charges</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-p-6 pdl pdtb">
+            <span class="txt txtg">Monthly Charges</span>
+          </div>
+          <div class="col-p-25 pdtb">
+            <span class="txt txtb nm nml"><i class="fa fa-{37}"></i>{20}</span>
+          </div> <!--invoice.CurrentCharges.ToString("C")-->
+          <div class="col-p-25">
+            <span></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-p-6 pdl pdtb">
+            <span class="txt txtg">Other Discounts & Charges</span>
+          </div>
+          <div class="col-p-25 pdtb">
+            <span class="txt txtb nm nml"><i class="fa fa-{37}"></i>{22}</span>
+          </div> <!--invoice.OtherAmounts.ToString("C")-->
+          <div class="col-p-25">
+            <span></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-p-6 pdl pdtb">
+            <span class="txt txtg">Service Tax ({23}%)</span>
+          </div> <!--invoice.ServiceTax percent 14%-->
+          <div class="col-p-25 pdtb">
+            <span class="txt txtb nm nml"><i class="fa fa-{37}"></i>{24}</span>
+          </div> <!--invoice.ServiceTax.ToString("C")-->
+          <div class="col-p-25">
+            <span></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-p-6 pdl pdtb">
+            <span class="txt txtg">Swatcha Bharat Cess ({25}%)</span>
+          </div> <!--@0.5% swatch bharat cess-->
+          <div class="col-p-25 pdtb">
+            <span class="txt txtb nm nml"><i class="fa fa-{37}"></i>{26}</span>
+          </div> <!--invoice.Swatch.ToString("C")-->
+          <div class="col-p-25">
+            <span></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-p-6 pdl pdtb">
+            <span class="txt txtg">Krishi Kalyan Cess ({27}%)</span>
+          </div> <!--@0.5% krishi kalyan cess-->
+          <div class="col-p-25 pdtb">
+            <span class="txt txtb nm nml"><i class="fa fa-{37}"></i>{28}</span>
+          </div> <!--invoice.KrishiKalyan.ToString("C")-->
+          <div class="col-p-25">
+            <span></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-p-6 pdl pdtb">
+            <span class="txt txtg">VAT/CST({29}%)</span>
+          </div> <!--vat/cst @5%-->
+          <div class="col-p-25 pdtb">
+            <span class="txt txtb nm nml"><i class="fa fa-{37}"></i>{30}</span>
+          </div> <!--invoice.Vat.ToString("C")-->
+          <div class="col-p-25">
+            <span></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-p-6 pdl pdtb">
+            <span class="txt txtg">Total Current Charges</span>
+          </div>
+          <div class="col-p-25">
+            <span></span>
+          </div>
+          <div class="col-p-25 pdtb">
+            <span class="txt txtb nm nml"><i class="fa fa-{37}"></i>{31}</span>
+          </div> <!--invoice.TotalCharges.ToString("C")-->
+        </div>
+        <div class="rbc rbb"></div>
+        <div class="row pdtb">
+          <div class="col-p-6 pdl pdtb">
+            <span class="txt txtg txtl">Total Amount Due</span>
+          </div>
+          <div class="col-p-25">
+            <span></span>
+          </div>
+          <div class="col-p-25 pdtb">
+            <span class="txt txtb txtl nm nmxl"><i class="fa fa-{37}"></i>{10}</span>
+          </div> <!--invoice.TotalDue.ToString("C")-->
+        </div>
+        <div class="rbc rbb pdl"></div>
+        <div class="row pdtb">
+          <div class="col-p-12">
+            <span class="txt txtb txtl">{32}.</span>
+          </div>
+        </div>
+        <div class="pdtb"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row pdtb">
+    <div class="col-p-12 text-center">
+      <span class="txt txtg txtl">Payment Information</span>
+    </div>
+  </div>
+  <div class="rbc rb3">
+    <div class="row pdl pdt">
+      <div class="col-p-11">Cheques should be in favour of <span class="txt txtb">"{34}"</span> &amp; sent to the below mentioned address.</div>
+    </div>
+    <!--<div class="rbc rbb"></div>-->
+    <div class="row pdt">
+      <div class="col-p-6 text-center">For NEFT/RTGS Use</div>
+      <div class="col-p-6 text-center">For SWIFT Use</div>
+    </div>
+    <div class="rbc rbb"></div>
+    <div class="row">
+      <div class="col-p-12">
+        <div class="row">
+          <div class="col-p-6">
+            <div class="row pdtb pdl">
+              <div class="col-p-4">BENEFICIARY:</div>
+              <div class="col-p-7"><span class="txt txtb">{38}</span></div>
+            </div>
+            <div class="row pdtb pdl">
+              <div class="col-p-4">BANK:</div>
+              <div class="col-p-7"><span class="txt txtb">{39}</span></div>
+            </div>
+            <div class="row pdtb pdl">
+              <div class="col-p-4">ACCOUNT NO:</div>
+              <div class="col-p-7"><span class="txt txtb">{40}</span></div>
+            </div>
+            <div class="row pdtb pdl">
+              <div class="col-p-4">IFSC/NEFT CODE:</div>
+              <div class="col-p-7"><span class="txt txtb">{41}</span></div>
+            </div>
+            <div class="row pdtb pdl">
+              <div class="col-p-4">BRANCH:</div>
+              <div class="col-p-7"><span class="txt txtb">{42}</span></div>
+            </div>
+          </div>
+          <div class="col-p-6" style="padding-left: 5px;">
+            <div class="row pdtb pdl">
+              <div class="col-p-4">BENEFICIARY:</div>
+              <div class="col-p-7"><span class="txt txtb">{43}</span></div>
+            </div>
+            <div class="row pdtb pdl">
+              <div class="col-p-4">BANK:</div>
+              <div class="col-p-7"><span class="txt txtb">{44}</span></div>
+            </div>
+            <div class="row pdtb pdl">
+              <div class="col-p-4">ACCOUNT NO:</div>
+              <div class="col-p-7"><span class="txt txtb">{45}</span></div>
+            </div>
+            <div class="row pdtb pdl">
+              <div class="col-p-4">SWIFT CODE:</div>
+              <div class="col-p-7"><span class="txt txtb">{46}</span></div>
+            </div>
+            <div class="row pdtb pdl">
+              <div class="col-p-4">BRANCH:</div>
+              <div class="col-p-7"><span class="txt txtb">{47}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="always-pba"></div>
+  <div class="row pdtb">
+    <div class="col-p-12 text-center">
+      <span class="txt txtg txtl">Summary of Accounts</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-p-12">
+      <div class="rbc rbnb160 rb3 pdt">
+        <div class="row text-center">
+          <div class="col-p-1">
+            <span class="txt txtg">#</span>
+          </div>
+          <div class="col-p-3">
+            <span class="txt txtg">Description</span>
+          </div>
+          <div class="col-p-2">
+            <span class="txt txtg">Start Date</span>
+          </div>
+          <div class="col-p-2">
+            <span class="txt txtg">End Date</span>
+          </div>
+          <div class="col-p-1">
+            <span class="txt txtg">Unit Cost</span>
+          </div>
+          <div class="col-p-1">
+            <span class="txt txtg">Total Units</span>
+          </div>
+          <div class="col-p-1">
+            <span class="txt txtg">Total</span>
+          </div>
+        </div>
+        <div class="rbc rbb"></div>{33} <!--invoice.SummaryOfAccounts-->
+      </div>
+    </div>
+  </div>
+  <div class="row pdtb">
+    <div class="col-p-6"></div>
+    <div class="col-p-6">
+      <div class="row">
+        <div class="col-p-6">
+          <span class="txt txtg txtl">Total Amount:</span>
+        </div>
+        <div class="col-p-6 nm nml">
+          <span class="txt txtb txtl"><i class="fa fa-{37}"></i>{20}</span>
+        </div> <!--invoice.CurrentCharges.ToString("C")-->
+      </div>
+    </div>
+  </div>
+  <div class="rbc rbb"></div>
+  <div class="row pdtb">
+    <div class="col-p-12 text-center">
+      <span class="txt txtg txtl">Customer Information</span>
+    </div>
+  </div>
+  <div class="rbc rb3">
+    <div class="row" style="padding-right: 10px">
+      <div class="col-p-12 txt txtg">
+        <ul>
+          <li class="pdtb">Payable on or before due date & if delayed interest will be charged @ 2.5%.</li>
+          <li class="pdtb">Payment by cheques are accepted only if same is relased on or before due date, in case of delay we request you to wire transfer the payment within 5 days of expiry of due date.</li>
+          <li class="pdtb">After expiry of 5th day of due date for payment, services will be temporarily disconnected till receipt of total outstanding amount in bank account of GlobalOutlook Pvt. Ltd.</li>
+          <li class="pdtb">For hard copy of invoice send a request to "accounts_receivable@globaloutlook.com" within 2 working days of receipt of the soft copy of invoice. Demand for hard copy of invoice will not be accepted when the payment is due though it will be provided.</li>
+          <li class="pdtb">Contents of this invoice will be considered correct if no error is reported within 3 working days of receipt of the Invoice.</li>
+          <li class="pdtb">Incase of any queries, please write us to "accounts_receivable@globaloutlook.com".</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row pdtb">
+    <div class="col-p-12 text-center">
+      <span class="txt txtg txtl">Support Information</span>
+    </div>
+  </div>
+  <div class="rbc rb3">
+    <div class="row">
+      <div class="col-p-6">
+        <div class="row pdtb pdl">
+          <div class="col-p-2">
+            <i class="fa fa-phone fa-2x"></i>
+          </div>
+          <div class="col-p-9">
+            <span class="txt txtg txtl">{35}</span>
+          </div><!--+ 91 40 6689 1201-->
+        </div>
+      </div>
+      <div class="col-p-6">
+        <div class="row pdtb pdl">
+          <div class="col-p-2">
+            <i class="fa fa-envelope fa-2x"></i>
+          </div>
+          <div class="col-p-9">
+            <span class="txt txtg txtl">{36}</span>
+          </div><!--support@globaloutlook.com-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row pdtb">
+    <div class="col-p-12 text-left">
+      <span class="txt txtg">Note: This is a Computer Generated Invoice and does not require any official signature.</span>
+    </div>
+  </div>
+</body>
+</html>

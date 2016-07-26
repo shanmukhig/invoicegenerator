@@ -1,0 +1,58 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="serviceTax">Service Tax:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.serviceTax, 'Service Tax')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-percent"></i></span>
+          <input name="serviceTax" required type="number" step="0.1" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.tax.serviceTax" data-ng-pattern="percent" placeholder="14.5" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.serviceTax)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="swatchBharat">Swatch Bharat Cess:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.swatchBharat, 'Swatch Bharat Cess')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-percent"></i></span>
+          <input name="swatchBharat" required type="number" step="0.1" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.tax.swatchBharat" data-ng-pattern="percent" placeholder="0.5" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.swatchBharat)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="krishiKalyan">Krishi Kalyan Cess:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.krishiKalyan, 'Krishi Kalyan Cess')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-percent"></i></span>
+          <input name="krishiKalyan" required type="number" step="0.1" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.tax.krishiKalyan" data-ng-pattern="percent" placeholder="0.5" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.krishiKalyan)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="vat">VAT:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.vat, 'VAT')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-percent"></i></span>
+          <input name="vat" type="number" step="0.1" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="6" data-ng-model="entity.tax.vat" data-ng-pattern="percent" placeholder="5" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.vat)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

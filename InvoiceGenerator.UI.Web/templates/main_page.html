@@ -1,0 +1,16 @@
+﻿<div class="container">
+    <ul class="nav nav-tabs">
+        <li data-ng-repeat="i in data.tabs" data-ng-class="{'active in':getActive(i.id)}" uib-tooltip="{{i.name}}">
+            <a data-toggle="tab" data-target="{{i.id}}" data-ng-click="getItems(i) "><i class="fa fa-{{i.fontIcon}} fa-15x "></i></a>
+        </li>
+    </ul>
+    <i class="fa fa-fw "></i>
+    <div class="container " style="marging:0;padding:0; ">
+        <div class="tab-content ">
+            <div id="i.id " data-ng-repeat="i in data.tabs " class="tab-pane fade " data-ng-class="{ 'active in': getActive(i.id)} ">
+                <div data-ng-include="i.view_template "></div>
+            </div>
+        </div>
+
+    </div>
+</div>

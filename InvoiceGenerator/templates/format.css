@@ -1,0 +1,143 @@
+﻿body { font-family: 'Eras Medium ITC' }
+
+@media print {
+  .col-p-1, .col-p-2, .col-p-3, .col-p-4, .col-p-5, .col-p-6, .col-p-7, .col-p-8, .col-p-9, .col-p-10, .col-p-11, .col-p-12, .col-p-25, .col-p-65 {
+    float: left;
+    font-family: 'Eras Medium ITC';
+    min-height: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    position: relative;
+  }
+
+  .ww { word-wrap: break-word }
+
+  .nm {
+    display: inline-block;
+    text-align: right;
+  }
+
+  .nml { width: 100px }
+
+  .nmxl { width: 140px }
+
+  .nmm { width: 80px }
+
+  .nms { width: 50px }
+
+  .img {
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+    overflow: hidden
+  }
+
+  .pdtb {
+    padding-top: 4px;
+    padding-top: 4px
+  }
+
+  .pdt { padding-top: 10px; }
+
+  .pdl { padding-left: 10px }
+
+  .rbc {
+    -ms-border-radius: 10px;
+    border: 1px solid #808080;
+    border-radius: 10px;
+    margin-top: 10px;
+    min-height: 1px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .rb3 { border: 3px solid #808080 }
+
+  .rbb { background-color: #808080 }
+
+  div.rbnb160 { min-height: 145px }
+
+  div.rbnb140 { min-height: 125px }
+
+  div.rbnbs { min-height: 100px }
+
+  .txt { font-size: 16px }
+
+  .txtl {
+    font-size: 21px;
+    font-weight: bold
+  }
+
+  .txtg { color: #000 }
+
+  .txtb { color: #5782c4 }
+
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .row:before, .row:after {
+    content: ' ';
+    display: table;
+  }
+
+  .row:after { clear: both }
+
+  .row:before, .row:after {
+    content: ' ';
+    display: table;
+  }
+
+  .row:after { clear: both }
+
+  .text-center { text-align: center }
+
+  .pull-right { float: right !important }
+
+  .pull-left { float: left !important }
+
+  .col-p-12 { width: 100% }
+
+  .col-p-11 { width: 91.66666667% }
+
+  .col-p-10 { width: 83.33333333% }
+
+  .col-p-9 { width: 75% }
+
+  .col-p-8 { width: 66.66666667% }
+
+  .col-p-7 { width: 58.33333333% }
+
+  .col-p-65 { width: 57.33333333% }
+
+  .col-p-6 { width: 49% }
+
+  .col-p-5 { width: 41.66666667% }
+
+  .col-p-4 { width: 33.33333333% }
+
+  .col-p-3 { width: 25% }
+
+  .col-p-25 { width: 19.75% }
+
+  .col-p-2 { width: 16.66666667% }
+
+  .col-p-1 { width: 8.33333333% }
+
+  .always-pba { page-break-after: always }
+
+  ul {
+    display: block;
+    list-style-type: disc;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1em;
+    padding-left: 30px;
+  }
+
+  li {
+    margin-bottom: 0, 5em;
+    margin-top: 0.5em;
+  }
+}

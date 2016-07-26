@@ -1,0 +1,348 @@
+﻿<form name="lf" novalidate data-ng-submit="save()">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default" style="margin: 0px;">
+                <div class="panel-heading" style="height: 40px; padding-top: 4px;">
+                    <div class="btn-toolbar pull-right" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <button type="submit" class="btn btn-default btn-sm" data-ng-disabled="lf.$invalid || getBusyStatus()"><i uib-tooltip="Save" class="fa fa-lfw fa-save fa-lg text-primary"></i></button>
+                            <button type="button" data-ng-click="close()" class="btn btn-default btn-sm"><i uib-tooltip="Close" class="fa fa-lfw fa-times fa-lg text-danger"></i></button>
+                        </div>
+                    </div>
+                    <label style="margin-top:6px;">Company Details</label>
+                </div>
+                <div class="panel-body">
+                    <div class="container" style="margin: 0; padding: 0; max-width: 100%">
+                        <ul class="nav nav-tabs">
+                            <li class="text-left" data-ng-class="{'active in' : getActive(1) }">
+                                <a data-toggle="tab" data-target="#1" data-ng-click="tabId = 1">Company</a>
+                            </li>
+                            <li class="text-left" data-ng-class="{'active in' : getActive(2) }">
+                                <a data-toggle="tab" data-target="#2" data-ng-click="tabId = 2">Address</a>
+                            </li>
+                            <li class="text-left" data-ng-class="{'active in' : getActive(3) }">
+                                <a data-toggle="tab" data-target="#3" data-ng-click="tabId = 3">Tax</a>
+                            </li>
+                            <li class="text-left" data-ng-class="{'active in' : getActive(4) }">
+                                <a data-toggle="tab" data-target="#4" data-ng-click="tabId = 4">Cheque</a>
+                            </li>
+                            <li class="text-left" data-ng-class="{'active in':getActive(5)}"><a data-toggle="tab" data-target="#5" data-ng-click="tabId = 5">NEFT/IFSC</a></li>
+                            <li class="text-left" data-ng-class="{'active in':getActive(6)}"><a data-toggle="tab" data-target="#6" data-ng-click="tabId = 6">SWIFT</a></li>
+                            <li class="text-left" data-ng-class="{'active in':getActive(7)}"><a data-toggle="tab" data-target="#7" data-ng-click="tabId = 7">Support</a></li>
+                        </ul>
+                        <i class="fa fa-fw"></i>
+                        <div class="tab-content">
+                            <div id="#1" class="tab-pane fade" data-ng-class="{'active in' : getActive(1) }">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="companyName">Company Name:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.companyName, 'Company Name')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-building-o"></i></span>
+                                                    <input name="companyName" type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.companyName" required data-ng-pattern="text" placeholder="Imaginary Solutions Inc." />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.companyName)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="logo">Company Logo:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.logo, 'Company Logo')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-image"></i></span>
+                                                    <div name="logo" style="cursor:pointer" class="button form-control" accept="image/*" ng-max-size="1MB" ngf-select="convertToBase64($file)" ngf-multiple="false">Plese select a logo</div>
+                                                    <span class="input-group-addon"><i data-ng-class="getLogo()"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="comments">Comments:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.comments, ' Comments ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-newspaper-o"></i></span>
+                                                    <input name="comments" type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" ng-model="entity.comments" data-ng-pattern="text" placeholder="comments" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.comments)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="#2" class="tab-pane fade" data-ng-class="{'active in ' : getActive(2) }">
+                                <div data-ng-include="'templates/address.html'" />
+                            </div>
+                            <div id="#3" class="tab-pane fade" data-ng-class="{'active in ' : getActive(3) }">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="serviceTaxNo">Service Tax No.:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.serviceTaxNo, 'Service Tax No ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-hashtag"></i></span>
+                                                    <input name="serviceTaxNo" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.tax.serviceTaxNo" data-ng-pattern="text" placeholder="Service Tax Number" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.serviceTaxNo)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="tin">TIN:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.tin, 'TIN ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-hashtag"></i></span>
+                                                    <input name="tin" required type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.tax.tin" data-ng-pattern="text" placeholder="TIN" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.tin)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="pan">PAN:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.pan, 'PAN ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-hashtag"></i></span>
+                                                    <input name="pan" required type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.tax.pan" data-ng-pattern="text" placeholder="PAN" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.pan)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="cin">CIN:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.cin, 'CIN ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-hashtag"></i></span>
+                                                    <input name="cin" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.tax.cin" data-ng-pattern="text" placeholder="CIN" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.cin)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="#4" class="tab-pane fade" data-ng-class="{'active in ': getActive(4)}">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="bankName">Cheque to be drawn on:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.bankName, 'Cheque to be drawn on ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+                                                    <input name="bankName" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.cheque.bankName" data-ng-pattern="text" placeholder="Imaginary Solutions Inc." />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.bankName)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="#5" class="tab-pane fade" data-ng-class="{'active in ' : getActive(5) }">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="ifscbeneficiary">BENEFICIARY:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.ifscbeneficiary, 'Beneficiary ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+                                                    <input name="ifscbeneficiary" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.ifsc.beneficiary" data-ng-pattern="text" placeholder="Imaginary Solutions Inc." />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.ifscbeneficiary)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="ifscbank">BANK:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.ifscbank, 'Bank Name ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+                                                    <input name="ifscbank" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.ifsc.bankName" data-ng-pattern="text" placeholder="Bank Name" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.ifscbank)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="ifscaccountNo">ACCOUNT NO:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.ifscaccountNo, 'Account No ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+                                                    <input name="ifscaccountNo" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.ifsc.accountNo" data-ng-pattern="text" placeholder="Account No" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.ifscaccountNo)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="ifsccode">CODE:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.ifsccode, 'IFSC/NEFT Code ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+                                                    <input name="ifsccode" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.ifsc.code" data-ng-pattern="text" placeholder="IFSC/NEFT Code" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.ifsccode)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="ifscbranch">BRANCH:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.ifscbranch, 'Branch Name ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+                                                    <input name="ifscbranch" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.ifsc.branch" data-ng-pattern="text" placeholder="Branch Name" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.ifscbranch)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="#6" class="tab-pane fade" data-ng-class="{'active in ' : getActive(6) }">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="swiftbeneficiary">BENEFICIARY:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.swiftbeneficiary, 'Beneficiary ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+                                                    <input name="swiftbeneficiary" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.swift.beneficiary" data-ng-pattern="text" placeholder="Imaginary Solutions Inc." />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.swiftbeneficiary)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="swiftbank">BANK:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.swiftbank, 'Bank Name ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+                                                    <input name="swiftbank" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.swift.bankName" data-ng-pattern="text" placeholder="Bank Name" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.swiftbank)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="swiftaccountNo">ACCOUNT NO:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.swiftaccountNo, 'Account No ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+                                                    <input name="swiftaccountNo" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.swift.accountNo" data-ng-pattern="text" placeholder="Account No" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.swiftaccountNo)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="swiftcode">CODE:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.swiftcode, 'SWIFT Code ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+                                                    <input name="swiftcode" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.swift.code" data-ng-pattern="text" placeholder="SWIFT Code" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.swiftcode)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="swiftbranch">BRANCH:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.swiftbranch, 'Branch Name ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+                                                    <input name="swiftbranch" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.swift.branch" data-ng-pattern="text" placeholder="Branch Name" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.swiftbranch)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="#7" class="tab-pane fade" data-ng-class="{'active in ': getActive(7)}">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="supportPhone">Phone:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.supportPhone, 'Support Phone ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-phone"></i></span>
+                                                    <input name="supportPhone" type="tel" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="20" data-ng-model="entity.support.phone" data-ng-pattern="phone" placeholder="4523658985" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.supportPhone)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="email">Email:</label>
+                                            </div>
+                                            <div class="div-input" uib-tooltip="{{getMsg(lf.email, 'Support Email ')}}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-at"></i></span>
+                                                    <input name="email" type="email" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="20" data-ng-model="entity.support.email" data-ng-pattern="email" placeholder="someone@support.com" />
+                                                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.email)"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

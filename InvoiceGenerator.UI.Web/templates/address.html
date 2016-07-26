@@ -1,0 +1,100 @@
+<ul class="list-group">
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="address1">Address 1:</label>
+            </div>
+            <div class="div-input" uib-tooltip="{{getMsg(lf.address1, 'Address 1')}}">
+                <div class="input-group">
+                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-map-signs"></i></span>
+                    <input name="address1" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.address.address1" data-ng-pattern="text" placeholder="Watermark Technopart" />
+                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.address1)"></i></span>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="address2">Address 2:</label>
+            </div>
+            <div class="div-input" uib-tooltip="{{getMsg(lf.address2, 'Address 2')}}">
+                <div class="input-group">
+                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-map-signs"></i></span>
+                    <input name="address2" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.address.address2" data-ng-pattern="text" placeholder="10th and 9th Floor, Gachibowli, Madhapur" />
+                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.address2)"></i></span>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="city">City:</label>
+            </div>
+            <div class="div-input" uib-tooltip="{{getMsg(lf.city, 'City')}}">
+                <div class="input-group">
+                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-map-marker"></i></span>
+                    <input name="city" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.address.city" data-ng-pattern="text" placeholder="Hyderabad" />
+                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.city)"></i></span>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="state">State:</label>
+            </div>
+            <div class="div-input" uib-tooltip="{{getMsg(lf.state, 'State')}}">
+                <div class="input-group">
+                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-map-marker"></i></span>
+                    <input name="state" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.address.state" data-ng-pattern="text" placeholder="Telangana" />
+                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.state)"></i></span>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="zip">Zip:</label>
+            </div>
+            <div class="div-input" uib-tooltip="{{getMsg(lf.zip, 'Zip')}}">
+                <div class="input-group">
+                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-map-marker"></i></span>
+                    <input name="zip" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.address.zip" data-ng-pattern="zip" placeholder="500084" />
+                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.zip)"></i></span>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="phone">Phone:</label>
+            </div>
+            <div class="div-input" uib-tooltip="{{getMsg(lf.phone, 'Phone')}}">
+                <div class="input-group">
+                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-phone"></i></span>
+                    <input name="phone" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="20" data-ng-model="entity.address.phone" data-ng-pattern="phone" placeholder="3234348998" />
+                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.phone)"></i></span>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="email">Email:</label>
+            </div>
+            <div class="div-input" uib-tooltip="{{getMsg(lf.email, 'Email')}}">
+                <div class="input-group">
+                    <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-at"></i></span>
+                    <input name="email" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="20" data-ng-model="entity.address.email" data-ng-pattern="email" placeholder="test@test.com" />
+                    <span class="input-group-addon"><i data-ng-class="getIcon(lf.email)"></i></span>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
