@@ -55,12 +55,17 @@
     <Content Include="content\bootstrap.min.css" />
     <Content Include="content\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\imprima-v4-latin-regular.svg" />
     <Content Include="packages.config" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\Imprima-Regular.ttf" />
+    <Content Include="fonts\imprima-v4-latin-regular.eot" />
+    <Content Include="fonts\imprima-v4-latin-regular.woff" />
+    <Content Include="fonts\imprima-v4-latin-regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -76,10 +81,15 @@
     <Content Include="scripts\bootstrap-iconpicker.js" />
     <Content Include="scripts\bootstrap-iconpicker.min.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\create_customer.js" />
     <Content Include="scripts\create_payment.js" />
+    <Content Include="scripts\data_service.js" />
     <Content Include="scripts\iconset-fontawesome-4.0.0.min.js" />
     <Content Include="scripts\jquery.min.js" />
     <Content Include="scripts\main_page.js" />
+    <Content Include="scripts\modal_window.js" />
+    <Content Include="scripts\modal_window_invoice.js" />
+    <Content Include="scripts\modal_window_payments.js" />
     <Content Include="scripts\ng-file-upload-shim.min.js" />
     <Content Include="scripts\ng-file-upload.min.js" />
     <Content Include="scripts\payments.js" />
