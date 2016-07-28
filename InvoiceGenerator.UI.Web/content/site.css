@@ -1,6 +1,15 @@
-﻿@font-face {
-    src: url('../fonts/Imprima-Regular.ttf') format(truetype);
-    font-family: "Imprima"
+﻿/* imprima-regular - latin */
+@font-face {
+  font-family: 'Imprima';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/imprima-v4-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Imprima'), local('Imprima-Regular'),
+       url('../fonts/imprima-v4-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/imprima-v4-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/imprima-v4-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/imprima-v4-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/imprima-v4-latin-regular.svg#Imprima') format('svg'); /* Legacy iOS */
 }
 
 body {
