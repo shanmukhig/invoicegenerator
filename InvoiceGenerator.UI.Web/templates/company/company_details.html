@@ -1,0 +1,44 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="companyName">Company Name:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.companyName, 'Company Name')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-building-o"></i></span>
+          <input name="companyName" type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.companyName" required data-ng-pattern="text" placeholder="Imaginary Solutions Inc." />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.companyName)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="logo">Company Logo:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.logo, 'Company Logo')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-image"></i></span>
+          <div name="logo" style="cursor:pointer" class="button form-control" accept="image/*" ng-max-size="1MB" ngf-select="convertToBase64($file)" ngf-multiple="false">Plese select a logo</div>
+          <span class="input-group-addon"><i data-ng-class="getLogo()"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="comments">Comments:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.comments, ' Comments ')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-newspaper-o"></i></span>
+          <input name="comments" type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" ng-model="entity.comments" data-ng-pattern="text" placeholder="comments" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.comments)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

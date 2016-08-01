@@ -1,0 +1,48 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="companyName">Company:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.companyName, 'Company Name')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-building-o"></i></span>
+          <select class="form-control" name="invoiceNo" required data-ng-model="entity.companyId">
+                            <option data-ng-repeat="i in companies" value="{{i.id}}">{{i.companyName + ',' + i.address.city}}</option>
+                          </select>
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.invoiceNo)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="customerName">Customer:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.customerName, 'Customer name')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-user"></i></span>
+          <select class="form-control" name="customerName" required data-ng-model="entity.customerId">
+                            <option data-ng-repeat="i in customers" value="{{i.id}}">{{i.customerName + ',' + i.city}}</option>
+                          </select>
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.customerName)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="comments">Comments:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.comments, 'Comments')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-newspaper-o"></i></span>
+          <input name="comments" type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.comments" data-ng-pattern="text" placeholder="comments" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.comments)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

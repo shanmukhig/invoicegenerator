@@ -1,0 +1,58 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="serviceTaxNo">Service Tax No.:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.serviceTaxNo, 'Service Tax No ')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-hashtag"></i></span>
+          <input name="serviceTaxNo" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.tax.serviceTaxNo" data-ng-pattern="text" placeholder="Service Tax Number" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.serviceTaxNo)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="tin">TIN:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.tin, 'TIN ')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-hashtag"></i></span>
+          <input name="tin" required type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.tax.tin" data-ng-pattern="text" placeholder="TIN" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.tin)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="pan">PAN:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.pan, 'PAN ')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-hashtag"></i></span>
+          <input name="pan" required type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.tax.pan" data-ng-pattern="text" placeholder="PAN" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.pan)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="cin">CIN:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.cin, 'CIN ')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-hashtag"></i></span>
+          <input name="cin" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.tax.cin" data-ng-pattern="text" placeholder="CIN" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.cin)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

@@ -34,17 +34,17 @@ namespace InvoiceGenerator.UI.Win
     private void btnGenerate_Click(object sender, EventArgs e)
     {
       IDataProvider dataProvider = new ExcelDataProvider(fileName);
-      var invoices = dataProvider.ReadInvoices();
+      IEnumerable<Invoice> invoices = dataProvider.ReadInvoices();
       IEnumerable<Customer> customers = dataProvider.ReadCustomers().ToList();
       IEnumerable<Company> companies = dataProvider.ReadCompanies().ToList();
 
-      var processor = new InvoiceProcessor(dataProvider, rootPath);
+      InvoiceProcessor processor = new InvoiceProcessor(dataProvider, rootPath);
 
       foreach (var invoice in invoices)
       {
         var customer = customers.Single(x => x.Id == invoice.CustomerId);
 
-        processor.GeneratePdf(invoice, companies.Single(x => x.Id == invoice.CompanyId), customer);
+        processor.GetPdfFile(invoice, companies.Single(x => x.Id == invoice.CompanyId), customer);
 
         MessageBox.Show("Successflly completed generating all invoices", "Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

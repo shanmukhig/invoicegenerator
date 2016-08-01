@@ -1,0 +1,130 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="productName">Product Name:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.productName, 'Company Name')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg {{bill.currency}}"></i></span>
+          <select class="form-control" name="productName" required ng-model="productId" ng-change="getPrice(productId)">
+                            <option data-ng-repeat="i in products" value="{{i.id}}">{{i.productName}}</option>
+                          </select>
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.productName)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="price">Price:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.price, 'Price')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg {{bill.currency}}"></i></span>
+          <input name="price" type="number" step="1.00" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="10" ng-change="getTotal()" data-ng-model="bill.price" data-ng-pattern="decimal" placeholder="100.00" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.price)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="from">From:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.from, 'Start Date')}}">
+        <div class="input-group">
+          <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="opened1=true"><i class="fa fa-lg fa-calendar"></i>  <i class="fa fa-sm fa-caret-down"></i></button>
+                    </span>
+          <input type="text" name="from" class="form-control" uib-datepicker-popup="EEEE, MMMM d, y" ng-model="bill.startDate" is-open="opened1" readonly datepicker-options="dateOptions" required close-text="Close" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.from)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="to">To:</label>
+      </div>
+      <div class="div-input" tooltip="{{getMsg(lf.to, 'End Date')}}">
+        <div class="input-group">
+          <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="opened2=true"><i class="fa fa-lg fa-calendar"></i>  <i class="fa fa-sm fa-caret-down"></i></button>
+                    </span>
+          <input type="text" name="to" class="form-control" uib-datepicker-popup="EEEE, MMMM d, y" ng-model="bill.endDate" is-open="opened2" readonly datepicker-options="dateOptions" required close-text="Close" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.to)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="quantity">Quantity:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.quantity, 'Quantity')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-fa-hashtag"></i></span>
+          <input name="quantity" type="number" step="1" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="10" ng-change="getTotal()" data-ng-model="bill.quantity" data-ng-pattern="integer" placeholder="123" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.quantity)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label style="padding-top: 5px;" class="text-right" for="phone">Total:</label>
+      </div>
+      <div class="div-input">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg {{bill.currency}}"></i></span>
+          <input name="phone" type="number" class="form-control" data-ng-disabled="true" ng-model="bill.total" />
+          <span class="input-group-addon"><i class="fa fa-check text-success"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label style="padding-top: 5px;" class="text-right" for="frequency">Billing frequency:</label>
+      </div>
+      <div class="div-input">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg {{bill.currency}}"></i></span>
+          <select class="form-control" name="customerName" required data-ng-model="bill.billingFrequency">
+            <option data-ng-repeat="i in frequencies" value="{{i.id}}">{{i.name}}</option>
+          </select>
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.frequency)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>
+<table class="table table-condensed table-striped table-responsive">
+  <thead>
+    <tr>
+      <td>Product Name</td>
+      <td>Price</td>
+      <td>Start</td>
+      <td>End</td>
+      <td>Quantity</td>
+      <td>Total</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="b in entity.bills">
+      <td>{{b.name}}</td>
+      <td>{{b.price}}</td>
+      <td>{{b.startDate|date:"EEEE, MMMM d, y"}}</td>
+      <td>{{b.endDate|date:"EEEE, MMMM d, y"}}</td>
+      <td>{{b.quantity}}</td>
+      <td>{{b.total}}</td>
+    </tr>
+  </tbody>
+</table>

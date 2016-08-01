@@ -9,18 +9,19 @@
                             <button type="button" data-ng-click="close()" class="btn btn-default btn-sm"><i uib-tooltip="Close" class="fa fa-lfw fa-times fa-lg text-danger"></i></button>
                         </div>
                     </div>
+                    <label style="margin-top:6px;">Customer Details</label>
                 </div>
                 <div class="panel-body">
                     <div class="container" style="margin: 0; padding: 0; max-width: 100%">
                         <ul class="nav nav-tabs">
                             <li class="text-left" data-ng-class="{'active in' : getActive(1) }">
-                                <a data-toggle="tab" data-target="#1" data-ng-click="tabId = 1">Customer Details</a>
+                                <a data-toggle="tab" data-target="#1" data-ng-click="tabId = 1">Customer</a>
                             </li>
                             <li class="text-left" data-ng-class="{'active in' : getActive(2) }">
-                                <a data-toggle="tab" data-target="#2" data-ng-click="tabId = 2">Address Details</a>
+                                <a data-toggle="tab" data-target="#2" data-ng-click="tabId = 2">Address</a>
                             </li>
                             <li class="text-left" data-ng-class="{'active in' : getActive(3) }">
-                                <a data-toggle="tab" data-target="#3" data-ng-click="tabId = 3">Tax Details</a>
+                                <a data-toggle="tab" data-target="#3" data-ng-click="tabId = 3">Tax</a>
                             </li>
                         </ul>
                         <i class="fa fa-fw"></i>

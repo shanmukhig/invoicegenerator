@@ -63,7 +63,7 @@
             <div class="div-input" uib-tooltip="{{getMsg(lf.zip, 'Zip')}}">
                 <div class="input-group">
                     <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-map-marker"></i></span>
-                    <input name="zip" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.address.zip" data-ng-pattern="zip" placeholder="500084" />
+                    <input name="zip" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="20" data-ng-model="entity.address.zip" data-ng-pattern="zip" placeholder="500084" />
                     <span class="input-group-addon"><i data-ng-class="getIcon(lf.zip)"></i></span>
                 </div>
             </div>
@@ -91,7 +91,7 @@
             <div class="div-input" uib-tooltip="{{getMsg(lf.email, 'Email')}}">
                 <div class="input-group">
                     <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-at"></i></span>
-                    <input name="email" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="20" data-ng-model="entity.address.email" data-ng-pattern="email" placeholder="test@test.com" />
+                    <input name="email" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="50" data-ng-model="entity.address.email" data-ng-pattern="email" placeholder="test@test.com" />
                     <span class="input-group-addon"><i data-ng-class="getIcon(lf.email)"></i></span>
                 </div>
             </div>

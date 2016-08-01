@@ -1,4 +1,4 @@
-﻿var module = angular.module('main_page', ['ngRoute', 'ui.bootstrap', 'ngFileUpload']);
+﻿var module = angular.module('main_page', ['ngRoute', 'ui.bootstrap']);
 
 module.config(function($routeProvider) {
     $routeProvider.when("/", {
@@ -13,12 +13,9 @@ module.config(function($routeProvider) {
 
 module.controller('vController', ['$scope', '$http', 'dataService', '$uibModal', function($scope, $http, dataService, $uibModal) {
     $scope.data = dataService;
-    //$scope.sortType = 'name';
     $scope.sortReverse = false;
     $scope.searchItem = '';
     $scope.tab = dataService.tabs[3];
-    //$scope.activeList = [];
-    //$scope.isBusy = true;
 
     $scope.getActive = function(item) {
         return item === parseInt($scope.tab.id);
@@ -76,7 +73,7 @@ module.controller('vController', ['$scope', '$http', 'dataService', '$uibModal',
 
         $scope.modalInstance = $uibModal.open({
             templateUrl: $scope.tab.edit_template,
-            controller: $scope.tab.uri === 'invoice' ? $scope.tab.uri + 'Controller' : 'mController',
+            controller: $scope.tab.uri + 'Controller',
             size: 'xlg',
             animation: true,
             keyboard: false,
@@ -86,7 +83,6 @@ module.controller('vController', ['$scope', '$http', 'dataService', '$uibModal',
                 modal: function() {
                     return {
                         entity: entity,
-                        //entityName: $scope.tab.uri,
                         scope: $scope
                     };
                 }

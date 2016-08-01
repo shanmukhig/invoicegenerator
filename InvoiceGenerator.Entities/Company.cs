@@ -13,18 +13,4 @@
     public Support Support { get; set; }
     public string Comments { get; set; }
   }
-
-  public class Support
-  {
-    public string Phone { get; set; }
-    public string Email { get; set; }
-  }
-
-  public class CompanyTax
-  {
-    public string ServiceTaxNo { get; set; }
-    public string Tin { get; set; }
-    public string Pan { get; set; }
-    public string Cin { get; set; }
-  }
 }

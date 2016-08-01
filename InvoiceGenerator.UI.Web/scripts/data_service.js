@@ -69,14 +69,30 @@ module.factory('dataService', function($http, $q) {
         'uri': 'payment'
     }];
 
+    var frequencies = [{
+        id: 0,
+        name: 'Other'
+    }, {
+        id: 1,
+        name: 'Monthly'
+    }, {
+        id: 3,
+        name: 'Quarterly'
+    }, {
+        id: 6,
+        name: 'Halfyearly'
+    }, {
+        id: 12,
+        name: 'Yearly'
+    }, ];
+
     var companies = [];
     var companiesLoaded = false;
 
     var getCompanies = function(reload) {
-        //var deferred = $q.defer();
         if (!companiesLoaded || reload) {
             companiesLoaded = true;
-            return getEntities(companies, 'company', $q, $http);
+            return getEntities(companies, 'company');
         }
         return $q.resolve(companies);
     }
@@ -87,7 +103,7 @@ module.factory('dataService', function($http, $q) {
     var getCustomers = function(reload) {
         if (!customersLoaded || reload) {
             customersLoaded = true;
-            return getEntities(customers, 'customer', $q, $http);
+            return getEntities(customers, 'customer');
         }
         return $q.resolve(customers);
     }
@@ -98,7 +114,7 @@ module.factory('dataService', function($http, $q) {
     var getProducts = function(reload) {
         if (!productsLoaded || reload) {
             productsLoaded = true;
-            return getEntities(products, 'product', $q, $http);
+            return getEntities(products, 'product');
         }
         return $q.resolve(products);
     }
@@ -108,7 +124,7 @@ module.factory('dataService', function($http, $q) {
     var getInvoices = function(reload) {
         if (!invoicesLoaded || reload) {
             invoicesLoaded = true;
-            return getEntities(invoices, 'invoice', $q, $http);
+            return getEntities(invoices, 'invoice');
         }
         return $q.resolve(invoices);
     }
@@ -119,7 +135,7 @@ module.factory('dataService', function($http, $q) {
     var getPayments = function(reload) {
         if (!paymentsLoaded || reload) {
             paymentsLoaded = true;
-            return getEntities(payments, 'payment', $q, $http);
+            return getEntities(payments, 'payment');
         }
         return $q.resolve(payments);
     }
@@ -163,5 +179,6 @@ module.factory('dataService', function($http, $q) {
         tabs: tabs,
         getEntity: getEntity,
         saveEntity: saveEntity,
+        frequencies: frequencies
     };
 });

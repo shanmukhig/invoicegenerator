@@ -21,6 +21,18 @@ namespace InvoiceGenerator
           <div class='col-p-1 nml'><span class='txt txtg nm nml'><i class='fa fa-{7}'></i>{5}</span></div>
         </div>";
 
+    private static readonly string taxes = @"<div class='row'>
+          <div class='col-p-6 pdl pdtb'>
+            <span class='txt txtg'>{0}({1}%)</span>
+          </div>
+          <div class='col-p-25 pdtb'>
+            <span class='txt txtb nm nml'><i class='fa fa-{3}'></i>{4}</span>
+          </div>
+          <div class='col-p-25'>
+            <span></span>
+          </div>
+        </div>";
+
     private readonly Customer customer;
 
     public InvoiceExtender(Invoice invoice, IList<Product> products, Customer customer)
@@ -28,10 +40,33 @@ namespace InvoiceGenerator
       Invoice = invoice;
       this.customer = customer;
 
-      var sb = new StringBuilder();
+      CalculateTotals(invoice, products);
+      CalculateTaxes();
+    }
+
+    private void CalculateTaxes()
+    {
+      decimal value = CurrentCharges + Invoice.Adjustments;
+      decimal final = 0;
+
+      StringBuilder sb = new StringBuilder();
+
+      foreach (KeyValuePair<string, decimal> pair in customer.Taxes)
+      {
+        decimal v = value*(pair.Value/100);
+        sb.Append(string.Format(taxes, pair.Key, pair.Value, customer.Currency, v));
+        final += v;
+      }
+      Taxes = sb.ToString();
+      TotalCharges = CurrentCharges + final;
+    }
+
+    private void CalculateTotals(Invoice invoice, IList<Product> products)
+    {
+      StringBuilder sb = new StringBuilder();
       decimal total = 0;
       var i = 1;
-      foreach (var bill in invoice.Bills.Where(x => x.InvoiceId == Invoice.Id))
+      foreach (var bill in invoice.Bills)
       {
         var product = products.SingleOrDefault(x => x.Id == bill.ProductId);
 
@@ -64,28 +99,19 @@ namespace InvoiceGenerator
           i++, customer.Currency));
         total += price;
       }
-      summaryOfAccounts = sb.ToString();
-      currentCharges = total;
+      SummaryOfAccounts = sb.ToString();
+      CurrentCharges = total;
     }
 
-    public string summaryOfAccounts { get; set; }
-    public decimal currentCharges { get; set; }
+    public string SummaryOfAccounts { get; private set; }
 
-    public string SummaryOfAccounts => summaryOfAccounts;
-
-    public decimal CurrentCharges => currentCharges;
+    public decimal CurrentCharges { get; private set; }
 
     public Invoice Invoice { get; }
 
-    public decimal ServiceTax => (CurrentCharges + Invoice.Adjustments)*customer.Tax.ServiceTax/100;
+    public string Taxes { get; set; }
 
-    public decimal Swatch => (CurrentCharges + Invoice.Adjustments)*customer.Tax.SwatchBharat/100;
-
-    public decimal KrishiKalyan => (CurrentCharges + Invoice.Adjustments)*customer.Tax.KrishiKalyan/100;
-
-    public decimal Vat => (ServiceTax + CurrentCharges + Invoice.Adjustments)*customer.Tax.Vat/100;
-
-    public decimal TotalCharges => CurrentCharges + ServiceTax + Swatch + Vat;
+    public decimal TotalCharges { get; private set; }
 
     public decimal BalanceCarryForward => Invoice.PreviousAmt - Invoice.PreviousPayment + Invoice.Adjustments;
 
@@ -101,7 +127,7 @@ namespace InvoiceGenerator
         return this.Invoice.InvoiceNo;
       }
     }
-    
+
   }
 
   public class InvoiceProcessor
@@ -149,16 +175,16 @@ namespace InvoiceGenerator
       };
     }
 
-    public string GeneratePdf(Invoice i, Company company, Customer customer)
+    public MemoryStream GetPdfStream(Invoice i, Company company, Customer customer)
     {
-      var extender = new InvoiceExtender(i, products, customer);
+      InvoiceExtender extender = new InvoiceExtender(i, products, customer);
+      PdfResource resource = GeneratePdfResource(i, company, customer, extender);
+      return resource.Stream;
+    }
 
-      pdfPrintOptions.Footer.LeftText =
-        $"{company.CompanyName}, {company.Address.Address1}, {company.Address.Address2}, {company.Address.City}.{Environment.NewLine}{company.Address.State}, {company.Address.Zip}, Phone: {company.Address.Phone}. CIN: {company.Tax.Cin}";
-
-      var htmlToPdf = new HtmlToPdf(pdfPrintOptions);
-
-      var resource = htmlToPdf.RenderHtmlAsPdf(GetFormattedHtml(extender, company, customer));
+    public string GetPdfFile(Invoice i, Company company, Customer customer)
+    {
+      InvoiceExtender extender = new InvoiceExtender(i, products, customer);
 
       string directory = $@"{path}\invoices";
 
@@ -180,9 +206,23 @@ namespace InvoiceGenerator
         }
       }
 
+      PdfResource resource = GeneratePdfResource(i, company, customer, extender);
+
       resource.SaveAs($@"{path}\invoices\{extender.InvoiceNo}.pdf");
 
       return extender.InvoiceNo;
+    }
+
+    private PdfResource GeneratePdfResource(Invoice i, Company company, Customer customer, InvoiceExtender extender)
+    {
+      pdfPrintOptions.Footer.LeftText =
+        $"{company.CompanyName}, {company.Address.Address1}, {company.Address.Address2}, {company.Address.City}.{Environment.NewLine}{company.Address.State}, {company.Address.Zip}, Phone: {company.Address.Phone}. CIN: {company.Tax.Cin}";
+
+      HtmlToPdf htmlToPdf = new HtmlToPdf(pdfPrintOptions);
+
+      PdfResource resource = htmlToPdf.RenderHtmlAsPdf(GetFormattedHtml(extender, company, customer));
+
+      return resource;
     }
 
     private string GetFormattedHtml(InvoiceExtender extender, Company company, Customer customer)
@@ -191,8 +231,8 @@ namespace InvoiceGenerator
 
       return string.Format(text,
         logo, //0
-        i.StartDate.DFormat("dd MMM yyyy"), //1
-        i.EndDate.DFormat("dd MMM yyyy"), //2
+        i.StartDate.ToString("dd MMM yyyy"), //1
+        i.EndDate.ToString("dd MMM yyyy"), //2
         customer.CustomerName, //3
         customer.Address.Address1, //4
         customer.Address.Address2, //5
@@ -203,7 +243,7 @@ namespace InvoiceGenerator
         $"{Math.Round(extender.TotalDue, 0, MidpointRounding.AwayFromZero).CFormat("C0")}.00", //10
         i.DueDate.ToString("dddd, dd MMMM yyyy"), //11
         extender.InvoiceNo, //12
-        i.BillDate.DFormat("dd MMM yyyy"), //13
+        i.BillDate.ToString("dd MMM yyyy"), //13
         company.Tax.ServiceTaxNo, //14
         company.Tax.Pan, //15
         company.Tax.Tin, //16
@@ -213,14 +253,14 @@ namespace InvoiceGenerator
         extender.CurrentCharges.CFormat(), //20
         extender.BalanceCarryForward.CFormat(), //21
         extender.Invoice.Adjustments.CFormat(), //22
-        customer.Tax.ServiceTax.ToString("#00.00"), //23
-        extender.ServiceTax.CFormat(), //24
-        customer.Tax.SwatchBharat.ToString("#00.00"), //25
-        extender.Swatch.CFormat(), //26
-        customer.Tax.KrishiKalyan.ToString("#00.00"), //27
-        extender.KrishiKalyan.CFormat(), //28
-        customer.Tax.Vat.ToString("#00.00"), //29
-        extender.Vat.CFormat(), //30
+        extender.Taxes, //23
+        string.Empty, //24
+        string.Empty, //25
+        string.Empty, //26
+        string.Empty, //27
+        string.Empty, //28
+        string.Empty, //29
+        string.Empty, //30
         extender.TotalCharges.CFormat(), //31
         $"{Extentions.GetCurrency(customer.Currency)} {extender.InWords}", //32
         extender.SummaryOfAccounts, //33

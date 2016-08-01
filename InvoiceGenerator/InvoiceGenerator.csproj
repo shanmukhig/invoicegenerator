@@ -43,6 +43,7 @@
       <HintPath>..\packages\IronPdf.4.2.2\lib\net40\IronPdf.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -55,7 +56,7 @@
     <Compile Include="Extentions.cs" />
     <Compile Include="IDataProvider.cs" />
     <Compile Include="INotificationService.cs" />
-    <Compile Include="InvoiceProcessor.cs" />
+    <Compile Include="PdfInvoiceProcessor.cs" />
     <Compile Include="NumberToWords.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,0 +1,72 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="ifscbeneficiary">Beneficiary:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.ifscbeneficiary, 'Beneficiary ')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+          <input name="ifscbeneficiary" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.ifsc.beneficiary" data-ng-pattern="text" placeholder="Imaginary Solutions Inc." />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.ifscbeneficiary)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="ifscbank">Bank Name:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.ifscbank, 'Bank Name ')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+          <input name="ifscbank" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.ifsc.bankName" data-ng-pattern="text" placeholder="Bank Name" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.ifscbank)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="ifscaccountNo">Account No:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.ifscaccountNo, 'Account No ')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+          <input name="ifscaccountNo" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.ifsc.accountNo" data-ng-pattern="text" placeholder="Account No" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.ifscaccountNo)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="ifsccode">NEFT/IFSC Code:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.ifsccode, 'IFSC/NEFT Code ')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+          <input name="ifsccode" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.ifsc.code" data-ng-pattern="text" placeholder="IFSC/NEFT Code" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.ifsccode)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="ifscbranch">Branch Name:</label>
+      </div>
+      <div class="div-input" uib-tooltip="{{getMsg(lf.ifscbranch, 'Branch Name ')}}">
+        <div class="input-group">
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
+          <input name="ifscbranch" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.ifsc.branch" data-ng-pattern="text" placeholder="Branch Name" />
+          <span class="input-group-addon"><i data-ng-class="getIcon(lf.ifscbranch)"></i></span>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

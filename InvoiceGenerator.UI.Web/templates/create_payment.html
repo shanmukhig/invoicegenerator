@@ -10,6 +10,7 @@
               <button type="button" data-ng-click="close()" class="btn btn-default btn-sm" data-ng-disabled="frm.$invalid || isBusy"><i tooltip="Close" class="fa fa-lfw fa-times fa-lg text-danger"></i></button>
             </div>
           </div>
+          <label style="margin-top:6px;">Payment Details</label>
         </div>
         <div class="panel-body">
           <ul class="list-group">
@@ -45,7 +46,6 @@
                 </div>
               </div>
             </li>
-
             <li class="list-group-item">
               <div class="row">
                 <div class="col-md-3">
@@ -54,7 +54,7 @@
                 <div class="div-input" uib-tooltip="{{getMsg(lf.paymentDate, 'Payment Date')}}">
                   <p class="input-group">
                     <span class="input-group-btn">
-                      <button type="button" class="btn btn-default" ng-click="open()"><i class="fa fa-lg fa-calendar"></i>  <i class="fa fa-sm fa-caret-down"></i></button>
+                      <button type="button" class="btn btn-default" ng-click="opened=true"><i class="fa fa-lg fa-calendar"></i>  <i class="fa fa-sm fa-caret-down"></i></button>
                     </span>
                     <input type="text" name="paymentDate" class="form-control" uib-datepicker-popup="EEEE, MMMM d, y" ng-model="entity.paymentDate" is-open="opened" readonly datepicker-options="dateOptions" required close-text="Close" />
                     <span class="input-group-addon"><i data-ng-class="getIcon(lf.paymentDate)"></i></span>
