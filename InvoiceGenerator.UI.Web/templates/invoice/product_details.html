@@ -1,10 +1,11 @@
+<link rel="stylesheet" href="content/bootstrap-iconpicker.min.css" />
 <ul class="list-group">
   <li class="list-group-item">
     <div class="row">
       <div class="col-md-3">
         <label for="productName">Product Name:</label>
       </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.productName, 'Company Name')}}">
+      <div class="div-input" uib-tooltip="{{getMsg(lf.productName, 'Product Name')}}">
         <div class="input-group">
           <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg {{bill.currency}}"></i></span>
           <select class="form-control" name="productName" required ng-model="productId" ng-change="getPrice(productId)">
@@ -96,7 +97,7 @@
       </div>
       <div class="div-input">
         <div class="input-group">
-          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg {{bill.currency}}"></i></span>
+          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-align-center"></i></span>
           <select class="form-control" name="customerName" required data-ng-model="bill.billingFrequency">
             <option data-ng-repeat="i in frequencies" value="{{i.id}}">{{i.name}}</option>
           </select>
@@ -128,3 +129,5 @@
     </tr>
   </tbody>
 </table>
+<script src="scripts/iconset-fontawesome-4.0.0.min.js" type="text/javascript"></script>
+<script src="scripts/bootstrap-iconpicker.js" type="text/javascript"></script>

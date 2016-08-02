@@ -5,9 +5,9 @@ using InvoiceGenerator.Entities;
 
 namespace InvoiceGenerator.API.Controllers
 {
-  public class ProductApiController : BaseApiController<Product>
+  public class ProductController : BaseApiController<Product>
   {
-    public ProductApiController(IRepository<Product> repository) : base(repository)
+    public ProductController(IRepository<Product> repository) : base(repository)
     {
     }
 

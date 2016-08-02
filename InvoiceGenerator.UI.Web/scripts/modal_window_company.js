@@ -23,9 +23,15 @@
     }
 
     $scope.save = function() {
+
+      var ctrl = $('input[name="currency-picker"]');
+      if (ctrl && ctrl.length > 0) {
+        $scope.entity.currency = $('input[name="currency-picker"]').val();
+      }
+
       $uibModalInstance.close({
         entity: $scope.entity,
-        entityName: modal.entityName
+        //entityName: modal.entityName
       });
     }
 

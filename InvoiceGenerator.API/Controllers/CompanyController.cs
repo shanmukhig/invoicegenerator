@@ -81,9 +81,9 @@ namespace InvoiceGenerator.API.Controllers
   //  }
   //}
 
-  public class CompanyApiController : BaseApiController<Company>
+  public class CompanyController : BaseApiController<Company>
   {
-    public CompanyApiController(IRepository<Company> repository) : base(repository)
+    public CompanyController(IRepository<Company> repository) : base(repository)
     {
     }
 
