@@ -1,19 +1,30 @@
 (function() {
   var module = angular.module('main_page');
 
-  module.controller('paymentController', ['$scope', '$uibModalInstance', 'modal', 'dataService', function($scope, $uibModalInstance, modal, dataService) {
-
-    $scope.text = /^[a-zA-Z0-9\s.\-,@]+$/;
-    $scope.decimal = /^\d*(\.\d+)?$/;
+  module.controller('paymentController', ['$scope', '$uibModalInstance', 'modal', 'dataService', '$filter', function($scope, $uibModalInstance, modal, dataService, $filter) {
 
     $scope.entity = modal.entity;
 
-    dataService.getEntity(dataService.tabs[4].id, false).then(function(data) {
+    $scope.ds = dataService;
+
+    dataService.getEntity(dataService.tabs[3].id, false).then(function(data) {
       $scope.invoices = data;
     });
 
     $scope.backup = {};
     angular.copy($scope.entity, $scope.backup);
+
+    $scope.setCurrency = function() {
+      var invoice = $filter('filter')($scope.invoices, {
+        id: $scope.entity.invoiceNo
+      });
+
+      if (!invoice) {
+        return;
+      }
+
+      $scope.entity.currency = invoice.currency;
+    }
 
     $scope.close = function() {
       angular.copy($scope.backup, $scope.entity);
@@ -31,56 +42,5 @@
       });
     }
 
-    $scope.getIcon = function(ctrl) {
-      if (!ctrl) {
-        return null;
-      }
-
-      if (ctrl.$invalid || !ctrl.$valid) {
-        return 'fa fa-times text-danger';
-      } else if (ctrl.$valid) {
-        return 'fa fa-check text-success';
-      }
-
-      return null;
-    }
-
-    $scope.getMsg = function(ctrl, msg) {
-      if (!ctrl) {
-        return null;
-      }
-
-      if (ctrl.$name === 'logo') {
-        if ($scope.entity.logo && $scope.entity.logo === '') {
-          return 'Company logo is required';
-        } else {
-          return 'Company logo is valid';
-        }
-      }
-
-      if (ctrl.$error.pattern) {
-        return 'Please enter valid ' + msg + '.';
-      }
-
-      var text = '';
-
-      if (ctrl.$error.required) {
-        text = ' is required.';
-      }
-
-      if (ctrl.$error.maxlength) {
-        text = ' exceeding max length allowed.';
-      }
-
-      if (ctrl.$valid) {
-        if (ctrl.$name === 'comments') {
-          text = ' are valid.';
-        } else {
-          text = ' is valid.';
-        }
-      }
-
-      return msg + text;
-    };
   }]);
 })();

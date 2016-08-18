@@ -1,12 +1,12 @@
-﻿<form name="lf" novalidate data-ng-submit="save()">
+﻿<form name="lf" novalidate ng-submit="save()">
   <div class="row">
     <div class="col-lg-12">
       <div class="panel panel-default" style="margin: 0px;">
         <div class="panel-heading" style="height: 40px; padding-top: 4px;">
           <div class="btn-toolbar pull-right" role="toolbar">
             <div class="btn-group" role="group">
-              <button type="submit" class="btn btn-default btn-sm" data-ng-disabled="lf.$invalid || isBusy"><i tooltip="Save" class="fa fa-lfw fa-save fa-lg text-primary"></i></button>
-              <button type="button" data-ng-click="close()" class="btn btn-default btn-sm"><i tooltip="Close" class="fa fa-lfw fa-times fa-lg text-danger"></i></button>
+              <button type="submit" class="btn btn-default btn-sm" ng-disabled="lf.$invalid || isBusy"><i tooltip="Save" class="fa fa-lfw fa-save fa-lg text-primary"></i></button>
+              <button type="button" ng-click="close()" class="btn btn-default btn-sm"><i tooltip="Close" class="fa fa-lfw fa-times fa-lg text-danger"></i></button>
             </div>
           </div>
           <label style="margin-top:6px;">Invoice Details</label>
@@ -14,31 +14,25 @@
         <div class="panel-body">
           <div class="container" style="margin: 0; padding: 0; max-width: 100%">
             <ul class="nav nav-tabs">
-              <li class="text-left" data-ng-class="{'active in' : getActive(1) }">
-                <a data-toggle="tab" data-target="#1" data-ng-click="tabId = 1">Company and Customer Details</a>
+              <li class="text-left" ng-class="{'active in' : getActive(1) }">
+                <a toggle="tab" target="#1" ng-click="tabId = 1">Company and Customer Details</a>
               </li>
-              <li class="text-left" data-ng-class="{'active in' : getActive(2) }">
-                <a data-toggle="tab" data-target="#2" data-ng-click="tabId = 2">Product Details</a>
+              <li class="text-left" ng-class="{'active in' : getActive(2) }">
+                <a toggle="tab" target="#2" ng-click="tabId = 2">Product Details</a>
               </li>
-              <li class="text-left" data-ng-class="{'active in' : getActive(3) }">
-                <a data-toggle="tab" data-target="#3" data-ng-click="tabId = 3">Invoice Details</a>
+              <li class="text-left" ng-class="{'active in' : getActive(3) }">
+                <a toggle="tab" target="#3" ng-click="tabId = 3">Invoice Details</a>
               </li>
             </ul>
             <div class="tab-content">
               <i class="fa fa-fw"></i>
-              <div id="#1" class="tab-pane fade" data-ng-class="{'active in' : getActive(1) }">
+              <div id="#1" class="tab-pane fade" ng-class="{'active in' : getActive(1) }">
                 <div ng-include="'templates/invoice/company_customer.html'"></div>
               </div>
-              <div id="#2" class="tab-pane fade" data-ng-class="{'active in' : getActive(2) }">
-                <div class="btn-toolbar" role="toolbar">
-                  <div class="btn-group pull-right" role="group">
-                    <button uib-tooltip="Add another product" type="button" data-ng-click="addProduct()" class="btn btn-default btn-sm"><i class="fa fa-lfw fa-plus fa-lg text-primary"></i></button>
-                    <button uib-tooltip="Clear" type="button" data-ng-click="bill={}" class="btn btn-default btn-sm"><i class="fa fa-lfw fa-times fa-lg text-danger"></i></button>
-                  </div>
-                </div>
+              <div id="#2" class="tab-pane fade" ng-class="{'active in' : getActive(2) }">
                 <div ng-include="'templates/invoice/product_details.html'"></div>
               </div>
-              <div id="#3" class="tab-pane fade" data-ng-class="{'active in' : getActive(3) }">
+              <div id="#3" class="tab-pane fade" ng-class="{'active in' : getActive(3) }">
                 <div ng-include="'templates/invoice/invoice_details.html'"></div>
               </div>
             </div>

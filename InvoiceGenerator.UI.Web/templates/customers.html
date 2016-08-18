@@ -1,44 +1,31 @@
 ﻿<div class="panel panel-default">
-    <div class="panel-heading" style="padding-top: 4px; padding-bottom: 4px;">
-        <div data-ng-include="'templates/toolbar.html'" />
+  <div class="panel-heading" style="padding-top: 4px; padding-bottom: 4px;">
+    <div ng-include="'templates/toolbar.html'" />
+  </div>
+  <div class="panel-body background-grey">
+    <div ng-include="'templates/busy.html'" ng-show="isBusy"></div>
+    <div class="row" ng-show="!isBusy">
+      <div class="col-md-4" ng-repeat="i in activeList">
+        <div class="box box-widget widget-user">
+          <div class="widget-user-header bg-aqua-active">
+            <div class="info-box-icon">
+              <i class="fa {{i.currency}} white"></i>
+            </div>
+            <h3 class="widget-user-username"><label class="text-white" style="cursor: pointer;" ng-click="createOrEdit(i.id)">{{i.customerName}}</label></h3>
+            <span class="description-text text-white">{{i.address.countryCode}}</span>
+            <i class="fa fa-chevron-circle-down fa-fw fa-lg" ng-click='showDetails = !showDetails'></i>
+          </div>
+          <div class="box-footer" ng-show="showDetails">
+            <ul class="nav nav-stacked">
+              <li>
+                <a class="licolor" popover-trigger="'mouseenter'" popover-placement="auto" popover-title="Address" uib-popover-html="getAddressHtml(i)">Address</a>
+              </li>
+              <li><a class="licolor" popover-trigger="'mouseenter'" popover-placement="auto" popover-title="Taxes" uib-popover-html="getTaxesHtml(i)">Taxes</a></li>
+              <li><a class="licolor" popover-trigger="'mouseenter'" popover-placement="auto" popover-title="Communication" uib-popover-html="getCommHtml(i)">Communication</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="panel-body">
-        <div ng-include="'templates/busy.html'" ng-show="isBusy"></div>
-        <table class="table table-condensed table-bordered" ng-show="!isBusy">
-            <thead>
-                <tr class="text-nowrap">
-                    <th style="width: 1%"><span class="fa fa-lg fa-fw" data-ng-click="toggleAll()" data-ng-class="{'fa-check-square': isAllSelected, 'fa-square-o':!isAllSelected}"></span></th>
-                    <th style="width: 30%">Customer Name<span class="pull-right fa fa-fw" style="cursor: pointer" data-ng-click="changeSort('name')" data-ng-class="sortIcon()" data-ng-show="sortType == 'name'"></span></th>
-                    <th style="width: 25%">Address</th>
-                    <th style="width: 6%">Service Tax</th>
-                    <th style="width: 6%">VAT</th>
-                    <th style="width: 6%">Swatch Bharat Cess</th>
-                    <th style="width: 6%">Krishi Kalyan Cess</th>
-                    <th style="width: 15%">Contact Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-show="activeList.length == 0">
-                    <td style="width: 1%"></td>
-                    <td><i class="fa fa-life-ring fa-2x"></i> No records found.</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr data-ng-repeat="i in activeList | orderBy:tab.sortColumn:sortReverse | filter:searchItem" ng-show="activeList.length > 0">
-                    <td style="width: 1%"><span class="fa fa-lg fa-fw" data-ng-click="optionToggled(i)" data-ng-class="{'fa-check-square': i.selected, 'fa-square-o':!i.selected}"></span></td>
-                    <td><a style="cursor: pointer;" data-ng-click="createOrEdit(i.id)">{{i.customerName}}</a></td>
-                    <td>{{addressTrim(i.address, 30)}}</td>
-                    <td class="text-right">{{i.tax.serviceTax | number}}%</td>
-                    <td class="text-right">{{i.tax.vat | number}}%</td>
-                    <td class="text-right">{{i.tax.swatchBharat | number}}%</td>
-                    <td class="text-right">{{i.tax.krishiKalyan | number}}%</td>
-                    <td>{{i.contactName}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  </div>
 </div>

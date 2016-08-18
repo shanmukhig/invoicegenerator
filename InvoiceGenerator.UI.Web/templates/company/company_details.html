@@ -1,58 +1,20 @@
 <link rel="stylesheet" href="content/bootstrap-iconpicker.min.css" />
 <ul class="list-group">
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="companyName">Company Name:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.companyName, 'Company Name')}}">
-        <div class="input-group">
-          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-building-o"></i></span>
-          <input name="companyName" type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.companyName" required data-ng-pattern="text" placeholder="Imaginary Solutions Inc." />
-          <span class="input-group-addon"><i data-ng-class="getIcon(lf.companyName)"></i></span>
-        </div>
-      </div>
-    </div>
+    <input name="companyName" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.companyName" required ng-pattern="ds.text" placeholder="company name" uib-tooltip="{{ds.getMessage(lf.companyName, 'Company Name')}}" />
   </li>
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="logo">Company Logo:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.logo, 'Company Logo')}}">
-        <div class="input-group">
-          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-image"></i></span>
-          <div name="logo" style="cursor:pointer" class="button form-control" accept="image/*" ng-max-size="1MB" ngf-select="convertToBase64($file)" ngf-multiple="false">Plese select a logo</div>
-          <span class="input-group-addon"><i data-ng-class="getLogo()"></i></span>
-        </div>
-      </div>
-    </div>
+    <div name="logo" style="cursor:pointer" class="button form-control" accept="image/*" ng-max-size="1MB" ngf-select="convertToBase64($file)" ngf-multiple="false" uib-tooltip="{{ds.getMessage(lf.logo, 'Company Logo')}}">Plese select a logo</div>
   </li>
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="currency">Currency:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.currency, 'Currency')}}">
-        <button class="btn btn-default currencypicker" name="currency-picker" data-icon="fa-inr" data-ng-model="entity.currency" role="iconpicker"></button>
-      </div>
-    </div>
-    </div>
+    <button class="btn btn-default currencypicker" name="currency-picker" ng-model="entity.currency" role="iconpicker" uib-tooltip="{{ds.getMessage(lf.currency, 'Currency')}}"></button>
   </li>
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="comments">Comments:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.comments, ' Comments ')}}">
-        <div class="input-group">
-          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-newspaper-o"></i></span>
-          <input name="comments" type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" ng-model="entity.comments" data-ng-pattern="text" placeholder="comments" />
-          <span class="input-group-addon"><i data-ng-class="getIcon(lf.comments)"></i></span>
-        </div>
-      </div>
-    </div>
+    <input name="comments" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.comments" ng-pattern="ds.text" placeholder="comments" uib-tooltip="{{ds.getMessage(lf.comments, ' Comments ')}}" />
   </li>
 </ul>
+<div class="container">
+  <img ng-src="{{entity.logo}}" class="img-thumbnail" />
+</div>
 <script src="scripts/iconset-fontawesome-4.0.0.min.js" type="text/javascript"></script>
 <script src="scripts/bootstrap-iconpicker.js" type="text/javascript"></script>

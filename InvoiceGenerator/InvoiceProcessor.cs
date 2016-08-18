@@ -11,27 +11,11 @@ namespace InvoiceGenerator
 {
   public class InvoiceExtender
   {
-    private static readonly string row = @"<div class='row'>
-          <div class='col-p-1 text-center'><span class='txt txtg'>{6}</span></div>
-          <div class='col-p-3 text-left ww'><span class='txt txtb'>{0}</span></div>
-          <div class='col-p-2 text-center'><span class='txt txtg'>{1}</span></div>
-          <div class='col-p-2 text-center'><span class='txt txtg'>{2}</span></div>
-          <div class='col-p-1 nms'><span class='txt txtg nml'><i class='fa fa-{7}'></i>{3}</span></div>
-          <div class='col-p-1 nms'><span class='txt txtg nm nms'>{4}</span></div>
-          <div class='col-p-1 nml'><span class='txt txtg nm nml'><i class='fa fa-{7}'></i>{5}</span></div>
-        </div>";
+    private static readonly string row =
+      @"<div class='row'><div class='col-p-1 text-center'><span class='txt txtg'>{6}</span></div><div class='col-p-3 text-left ww'><span class='txt txtb'>{0}</span></div><div class='col-p-2 text-center'><span class='txt txtg'>{1}</span></div><div class='col-p-2 text-center'><span class='txt txtg'>{2}</span></div><div class='col-p-1 nms'><span class='txt txtg nml'><i class='fa fa-{7}'></i>{3}</span></div><div class='col-p-1 nms'><span class='txt txtg nm nms'>{4}</span></div><div class='col-p-1 nml'><span class='txt txtg nm nml'><i class='fa fa-{7}'></i>{5}</span></div></div>";
 
-    private static readonly string taxes = @"<div class='row'>
-          <div class='col-p-6 pdl pdtb'>
-            <span class='txt txtg'>{0}({1}%)</span>
-          </div>
-          <div class='col-p-25 pdtb'>
-            <span class='txt txtb nm nml'><i class='fa fa-{3}'></i>{4}</span>
-          </div>
-          <div class='col-p-25'>
-            <span></span>
-          </div>
-        </div>";
+    private static readonly string taxes =
+      @"<div class='row'><div class='col-p-6 pdl pdtb'><span class='txt txtg'>{0}({1}%)</span></div><div class='col-p-25 pdtb'><span class='txt txtb nm nml'><i class='fa fa-{3}'></i>{4}</span></div><div class='col-p-25'><span></span></div></div>";
 
     private readonly Customer customer;
 
@@ -51,10 +35,10 @@ namespace InvoiceGenerator
 
       StringBuilder sb = new StringBuilder();
 
-      foreach (KeyValuePair<string, decimal> pair in customer.Taxes)
+      foreach (Tax tax in customer.Taxes)
       {
-        decimal v = value*(pair.Value/100);
-        sb.Append(string.Format(taxes, pair.Key, pair.Value, customer.Currency, v));
+        decimal v = value*(tax.Percent/100);
+        sb.Append(string.Format(taxes, tax.Name, tax.Percent, customer.Currency, v));
         final += v;
       }
       Taxes = sb.ToString();
@@ -119,14 +103,14 @@ namespace InvoiceGenerator
 
     public string InWords => NumberToWords.ToWords((int) Math.Ceiling(TotalDue));
 
-    public string InvoiceNo
-    {
-      get
-      {
-        this.Invoice.InvoiceNo = $"{customer.CustomerName.Substring(0, 5)}-{DateTime.UtcNow.ToString("yyyyMMdd")}-{Invoice.Id}";
-        return this.Invoice.InvoiceNo;
-      }
-    }
+    //public string InvoiceNo
+    //{
+    //  get
+    //  {
+    //    this.Invoice.InvoiceNo = $"{customer.CustomerName.Substring(0, 5)}-{DateTime.UtcNow.ToString("yyyyMMdd")}-{Invoice.Id.Substring(0, 5)}".ToUpper();
+    //    return this.Invoice.InvoiceNo;
+    //  }
+    //}
 
   }
 
@@ -193,7 +177,7 @@ namespace InvoiceGenerator
         Directory.CreateDirectory(directory);
       }
 
-      string fileName = $@"{directory}\{extender.InvoiceNo}.pdf";
+      string fileName = $@"{directory}\{extender.Invoice.InvoiceNo}.pdf";
 
       if (File.Exists(fileName))
       {
@@ -208,9 +192,9 @@ namespace InvoiceGenerator
 
       PdfResource resource = GeneratePdfResource(i, company, customer, extender);
 
-      resource.SaveAs($@"{path}\invoices\{extender.InvoiceNo}.pdf");
+      resource.SaveAs($@"{path}\invoices\{extender.Invoice.InvoiceNo}.pdf");
 
-      return extender.InvoiceNo;
+      return extender.Invoice.InvoiceNo;
     }
 
     private PdfResource GeneratePdfResource(Invoice i, Company company, Customer customer, InvoiceExtender extender)
@@ -242,7 +226,7 @@ namespace InvoiceGenerator
         customer.Address.Phone, //9
         $"{Math.Round(extender.TotalDue, 0, MidpointRounding.AwayFromZero).CFormat("C0")}.00", //10
         i.DueDate.ToString("dddd, dd MMMM yyyy"), //11
-        extender.InvoiceNo, //12
+        extender.Invoice.InvoiceNo, //12
         i.BillDate.ToString("dd MMM yyyy"), //13
         company.Tax.ServiceTaxNo, //14
         company.Tax.Pan, //15

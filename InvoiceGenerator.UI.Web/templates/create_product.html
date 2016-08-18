@@ -1,82 +1,57 @@
 ﻿<link rel="stylesheet" href="content/bootstrap-iconpicker.min.css" />
-<form name="lf" novalidate data-ng-submit="save()">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default" style="margin: 0px;">
-                <div class="panel-heading" style="height: 40px; padding-top: 4px;">
-                    <div class="btn-toolbar pull-right" role="toolbar">
-                        <div class="btn-group" role="group">
-                            <button type="submit" class="btn btn-default btn-sm" data-ng-disabled="lf.$invalid || isBusy"><i uib-tooltip="Save" class="fa fa-lfw fa-save fa-lg text-primary"></i></button>
-                            <button type="button" data-ng-click="close()" class="btn btn-default btn-sm"><i uib-tooltip="Close" class="fa fa-lfw fa-times fa-lg text-danger"></i></button>
-                        </div>
-                    </div>
-                    <label style="margin-top:6px;">Product Details</label>
-                </div>
-                <div class="panel-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label style="padding-top: 5px;" class="text-right" for="productName">Product Name:</label>
-                                </div>
-                                <div class="div-input" uib-tooltip="{{getMsg(lf.productName, 'Product Name')}}">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-tag"></i></span>
-                                        <input name="productName" type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.productName" required data-ng-pattern="text" placeholder="Skype for Business" />
-                                        <span class="input-group-addon"><i data-ng-class="getIcon(lf.productName)"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label style="padding-top: 5px;" class="text-right" for="price">Price/Unit/Month:</label>
-                                </div>
-                                <div class="div-input" uib-tooltip="{{getMsg(lf.price, 'Price')}}">
-                                    <div class="input-group">
-                                        <span class="input-group-btn">
-                      <button class="btn btn-default currencypicker" name="currency-picker" data-icon="fa-inr" data-ng-model="entity.currency" role="iconpicker"></button>
-                    </span>
-                                        <input name="price" type="number" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.price" data-ng-pattern="decimal" placeholder="123,453.00" />
-                                        <span class="input-group-addon"><i data-ng-class="getIcon(lf.price)"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label style="padding-top: 5px;" class="text-right" for="quantity">Quantity:</label>
-                                </div>
-                                <div class="div-input" uib-tooltip="{{getMsg(lf.quantity, 'Quantity')}}">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-calendar"></i></span>
-                                        <input name="quantity" required type="number" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.quantity" data-ng-pattern="integer" placeholder="100" />
-                                        <span class="input-group-addon"><i data-ng-class="getIcon(lf.quantity)"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label style="padding-top: 5px;" class="text-right" for="comments">Comments:</label>
-                                </div>
-                                <div class="div-input" uib-tooltip="{{getMsg(lf.comments, 'Comments')}}">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-newspaper-o"></i></span>
-                                        <input name="comments" type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.comments" data-ng-pattern="text" placeholder="comments" />
-                                        <span class="input-group-addon"><i data-ng-class="getIcon(lf.comments)"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+<form name="lf" novalidate ng-submit="save()">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default" style="margin: 0px;">
+        <div class="panel-heading" style="height: 40px; padding-top: 4px;">
+          <div class="btn-toolbar pull-right" role="toolbar">
+            <div class="btn-group" role="group">
+              <button type="submit" class="btn btn-default btn-sm" ng-disabled="lf.$invalid || isBusy"><i uib-tooltip="Save" class="fa fa-lfw fa-save fa-lg text-primary"></i></button>
+              <button type="button" ng-click="close()" class="btn btn-default btn-sm"><i uib-tooltip="Close" class="fa fa-lfw fa-times fa-lg text-danger"></i></button>
             </div>
+          </div>
+          <label style="margin-top:6px;">Product Details</label>
         </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="div-input" uib-tooltip="{{getMsg(lf.productName, 'Product Name')}}">
+                <input name="productName" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.productName" required ng-pattern="ds.text" placeholder="product name" />
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="div-input" uib-tooltip="{{getMsg(lf.price, 'Price')}}">
+                <div class="input-group">
+                  <input name="price" type="number" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.price" ng-pattern="ds.decimal" placeholder="price/unit/month" />
+                  <span class="input-group-btn">
+                      <button class="btn btn-default currencypicker" name="currency-picker" icon="fa-inr" ng-model="entity.currency" role="iconpicker"></button>
+                    </span>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="div-input" uib-tooltip="{{getMsg(lf.quantity, 'Quantity')}}">
+                <input name="quantity" required type="number" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.quantity" ng-pattern="ds.integer" placeholder="available quantity" />
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="div-input" uib-tooltip="{{getMsg(lf.country, 'Country')}}">
+                <select class="form-control" name="country" required ng-model="entity.countryCode">
+                                        <option value="">please select a country</option>
+                            <option ng-repeat="i in countries" value="{{i.text}}">{{i.text}}</option>
+                          </select>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="div-input" uib-tooltip="{{getMsg(lf.comments, 'Comments')}}">
+                <input name="comments" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.comments" ng-pattern="ds.text" placeholder="comments" />
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 </form>
 <script src="scripts/iconset-fontawesome-4.0.0.min.js" type="text/javascript"></script>
 <script src="scripts/bootstrap-iconpicker.js" type="text/javascript"></script>

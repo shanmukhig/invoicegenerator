@@ -1,0 +1,12 @@
+<ul class="list-group">
+  <li class="list-group-item">
+    <div class="div-input" uib-tooltip="{{ds.getMessage(lf.phone, 'Phone')}}">
+      <input name="phone" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="20" ng-model="entity.address.phone" ng-pattern="ds.phone" placeholder="phone" />
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="div-input" uib-tooltip="{{ds.getMessage(lf.email, 'Email')}}">
+      <input name="email" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="50" ng-model="entity.address.email" ng-pattern="ds.email" placeholder="email" />
+    </div>
+  </li>
+</ul>

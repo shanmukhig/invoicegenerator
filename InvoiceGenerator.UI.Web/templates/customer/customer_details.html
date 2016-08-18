@@ -1,57 +1,18 @@
 <link rel="stylesheet" href="content/bootstrap-iconpicker.min.css" />
 <ul class="list-group">
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="customerName">Customer Name:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.customerName, 'Customer Name')}}">
-        <div class="input-group">
-          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-user"></i></span>
-          <input name="customerName" type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.customerName" required data-ng-pattern="text" placeholder="Planet Mars" />
-          <span class="input-group-addon"><i data-ng-class="getIcon(lf.customerName)"></i></span>
-        </div>
-      </div>
-    </div>
+    <input name="customerName" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.customerName" required ng-pattern="ds.text" placeholder="customer name" uib-tooltip="{{ds.getMessage(lf.customerName, 'Customer Name')}}"
+    />
   </li>
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="contactName">Contact Person:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.contactName, 'Contact Person')}}">
-        <div class="input-group">
-          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-list-alt"></i></span>
-          <input name="contactName" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.contactName" data-ng-pattern="text" placeholder="Prince Charles" />
-          <span class="input-group-addon"><i data-ng-class="getIcon(lf.contactName)"></i></span>
-        </div>
-      </div>
-    </div>
+    <input name="contactName" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.contactName" ng-pattern="ds.text" placeholder="contact person" uib-tooltip="{{ds.getMessage(lf.contactName, 'Contact Person')}}"
+    />
   </li>
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="currency">Currency:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.currency, 'Currency')}}">
-        <button class="btn btn-default currencypicker" name="currency-picker" data-icon="fa-inr" data-ng-model="entity.currency" role="iconpicker"></button>
-      </div>
-    </div>
-    </div>
+    <button class="btn btn-default currencypicker" name="currency-picker" icon="fa-inr" ng-model="entity.currency" role="iconpicker" uib-tooltip="{{ds.getMessage(lf.currency, 'Currency')}}"></button>
   </li>
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="comments">Comments:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.comments, 'Comments')}}">
-        <div class="input-group">
-          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-newspaper-o"></i></span>
-          <input name="comments" type="text" class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.comments" data-ng-pattern="text" placeholder="comments" />
-          <span class="input-group-addon"><i data-ng-class="getIcon(lf.comments)"></i></span>
-        </div>
-      </div>
-    </div>
+    <input name="comments" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.comments" ng-pattern="ds.text" placeholder="comments" uib-tooltip="{{ds.getMessage(lf.comments, 'Comments')}}" />
   </li>
 </ul>
 <script src="scripts/iconset-fontawesome-4.0.0.min.js" type="text/javascript"></script>

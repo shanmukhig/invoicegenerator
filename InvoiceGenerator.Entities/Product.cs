@@ -7,5 +7,6 @@
     public int Quantity { get; set; }
     public string Comments { get; set; }
     public string Currency { get; set; }
+    public string CountryCode { get; set; }
   }
 }

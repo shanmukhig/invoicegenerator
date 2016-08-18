@@ -9,41 +9,44 @@ namespace InvoiceGenerator.API.Controllers
 {
   public class InvoiceController : BaseApiController<Invoice>
   {
-    public InvoiceController(IRepository<Invoice> repository) : base(repository)
+    private readonly IRepository<Customer> customeRepository;
+
+    public InvoiceController(IRepository<Invoice> repository, IRepository<Customer> customeRepository) : base(repository)
     {
+      this.customeRepository = customeRepository;
     }
 
     [HttpGet]
     [Route("api/invoice")]
     public async Task<IHttpActionResult> GetInvoices()
     {
-      IEnumerable<Invoice> invoices = new List<Invoice>
-      {
-        new Invoice
-        {
-          InvoiceNo = $"abcd-{DateTime.UtcNow.ToString("yyyyMMdd")}-02",
-          CompanyId = "1",
-          CustomerId = "1",
-          BillDate = DateTime.UtcNow.AddDays(-1),
-          DueDate = DateTime.UtcNow.AddDays(10),
-          StartDate = DateTime.UtcNow.AddMonths(-1),
-          EndDate = DateTime.UtcNow.AddMonths(+1)
-        },
-        new Invoice
-        {
-          InvoiceNo = $"pqrs-{DateTime.UtcNow.ToString("yyyyMMdd")}-03",
-          CompanyId = "1",
-          CustomerId = "1",
-          BillDate = DateTime.UtcNow.AddDays(-1),
-          DueDate = DateTime.UtcNow.AddDays(10),
-          StartDate = DateTime.UtcNow.AddMonths(-1),
-          EndDate = DateTime.UtcNow.AddMonths(+1)
-        }
-      };
+      //IEnumerable<Invoice> invoices = new List<Invoice>
+      //{
+      //  new Invoice
+      //  {
+      //    InvoiceNo = $"abcd-{DateTime.UtcNow.ToString("yyyyMMdd")}-02",
+      //    CompanyId = "1",
+      //    CustomerId = "1",
+      //    BillDate = DateTime.UtcNow.AddDays(-1),
+      //    DueDate = DateTime.UtcNow.AddDays(10),
+      //    StartDate = DateTime.UtcNow.AddMonths(-1),
+      //    EndDate = DateTime.UtcNow.AddMonths(+1)
+      //  },
+      //  new Invoice
+      //  {
+      //    InvoiceNo = $"pqrs-{DateTime.UtcNow.ToString("yyyyMMdd")}-03",
+      //    CompanyId = "1",
+      //    CustomerId = "1",
+      //    BillDate = DateTime.UtcNow.AddDays(-1),
+      //    DueDate = DateTime.UtcNow.AddDays(10),
+      //    StartDate = DateTime.UtcNow.AddMonths(-1),
+      //    EndDate = DateTime.UtcNow.AddMonths(+1)
+      //  }
+      //};
 
-      await Task.FromResult(0);
+      //await Task.FromResult(0);
 
-      //IEnumerable<Invoice> customers = await Repository.GetAll().ConfigureAwait(false);
+      IEnumerable<Invoice> invoices = await Repository.GetAll().ConfigureAwait(false);
       return Ok(invoices);
     }
 
@@ -58,6 +61,7 @@ namespace InvoiceGenerator.API.Controllers
     [Route("api/invoice")]
     public async Task<IHttpActionResult> AddInvoice([FromBody] Invoice invoice)
     {
+      await GetInvoiceNo(invoice);
       return Ok(await Repository.AddOrUpdate(null, invoice).ConfigureAwait(false));
     }
 
@@ -65,7 +69,14 @@ namespace InvoiceGenerator.API.Controllers
     [Route("api/invoice/{id}")]
     public async Task<IHttpActionResult> UpdateInvoice([FromUri] string id, [FromBody] Invoice invoice)
     {
+      await GetInvoiceNo(invoice);
       return Ok(await Repository.AddOrUpdate(id, invoice).ConfigureAwait(false));
+    }
+
+    private async Task GetInvoiceNo(Invoice invoice)
+    {
+      Customer customer = await customeRepository.GetById(invoice.CustomerId);
+      invoice.GenerateInvoiceNo(invoice, customer);
     }
 
     [HttpDelete]

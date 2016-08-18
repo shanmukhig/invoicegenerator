@@ -1,21 +1,37 @@
 (function() {
   var module = angular.module('main_page');
 
-  module.controller('companyController', ['$scope', '$uibModalInstance', 'modal', function($scope, $uibModalInstance, modal) {
+  module.controller('companyController', ['$scope', '$uibModalInstance', 'modal', 'dataService', function($scope, $uibModalInstance, modal, dataService) {
+
     $scope.modal = modal;
 
-    $scope.text = /^[a-zA-Z0-9\s.\-,@]+$/;
-    $scope.email = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|in|co\.in|edu)\b$/;
-    $scope.phone = /^(\+\d{1,3} )?\d{2,4}[\- ]?\d{3,4}[\- ]?\d{4}$/;
-    $scope.zip = "^\d{5,6}([\-]?\d{4})?$"
-
     $scope.entity = modal.entity;
+
+    $scope.entity.companyTaxesHtml = '';
+
+    $scope.countries = dataService.countries;
+
+    $scope.ds = dataService;
 
     $scope.tabId = 1;
 
     $scope.getActive = function(item) {
       return item === parseInt($scope.tabId);
     }
+
+    $scope.convertToBase64 = function($file) {
+      if (!$file) {
+        return;
+      }
+
+      var fr = new FileReader()
+      fr.onloadend = function(e) {
+        $scope.entity.logo = e.target.result;
+        $scope.$apply();
+      }
+
+      fr.readAsDataURL($file);
+    };
 
     $scope.close = function() {
       var entity = $scope.entity;
@@ -26,7 +42,9 @@
 
       var ctrl = $('input[name="currency-picker"]');
       if (ctrl && ctrl.length > 0) {
-        $scope.entity.currency = $('input[name="currency-picker"]').val();
+        if ($('button[name="currency-picker"]').hasClass('ng-touched')) {
+          $scope.entity.currency = ctrl.val();
+        }
       }
 
       $uibModalInstance.close({
@@ -34,42 +52,5 @@
         //entityName: modal.entityName
       });
     }
-
-    $scope.getIcon = function(ctrl) {
-      if (!ctrl) {
-        return null;
-      }
-
-      if (ctrl.$invalid || !ctrl.$valid) {
-        return 'fa fa-times text-danger';
-      } else if (ctrl.$valid) {
-        return 'fa fa-check text-success';
-      }
-    }
-
-    $scope.getMsg = function(ctrl, msg, length, type) {
-      if (!ctrl) {
-        return null;
-      }
-
-      if (ctrl.$error.required) {
-        return msg + ' is required.';
-      }
-
-      if (ctrl.$error.maxlength) {
-        return msg + ' exceeding max length ' + length + ' allowed.';
-      }
-
-      if (ctrl.$error.pattern) {
-        return 'Please enter valid ' + msg + '.';
-      }
-
-      if (ctrl.$valid) {
-        if (ctrl.$name === 'comments') {
-          return msg + ' are valid.'
-        }
-        return msg + ' is valid.'
-      }
-    };
   }]);
 })();

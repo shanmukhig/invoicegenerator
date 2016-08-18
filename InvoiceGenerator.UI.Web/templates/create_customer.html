@@ -1,12 +1,12 @@
-﻿<form name="lf" novalidate data-ng-submit="save()">
+﻿<form name="lf" novalidate ng-submit="save()">
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default" style="margin: 0px;">
                 <div class="panel-heading" style="height: 40px; padding-top: 4px;">
                     <div class="btn-toolbar pull-right" role="toolbar">
                         <div class="btn-group" role="group">
-                            <button type="submit" class="btn btn-default btn-sm" data-ng-disabled="lf.$invalid || isBusy"><i uib-tooltip="Save" class="fa fa-lfw fa-save fa-lg text-primary"></i></button>
-                            <button type="button" data-ng-click="close()" class="btn btn-default btn-sm"><i uib-tooltip="Close" class="fa fa-lfw fa-times fa-lg text-danger"></i></button>
+                            <button type="submit" class="btn btn-default btn-sm" ng-disabled="lf.$invalid || isBusy"><i uib-tooltip="Save" class="fa fa-lfw fa-save fa-lg text-primary"></i></button>
+                            <button type="button" ng-click="close()" class="btn btn-default btn-sm"><i uib-tooltip="Close" class="fa fa-lfw fa-times fa-lg text-danger"></i></button>
                         </div>
                     </div>
                     <label style="margin-top:6px;">Customer Details</label>
@@ -14,27 +14,34 @@
                 <div class="panel-body">
                     <div class="container" style="margin: 0; padding: 0; max-width: 100%">
                         <ul class="nav nav-tabs">
-                            <li class="text-left" data-ng-class="{'active in' : getActive(1) }">
-                                <a data-toggle="tab" data-target="#1" data-ng-click="tabId = 1">Customer</a>
+                            <li class="text-left" ng-class="{'active in' : getActive(1) }">
+                                <a toggle="tab" target="#1" ng-click="tabId = 1">Customer</a>
                             </li>
-                            <li class="text-left" data-ng-class="{'active in' : getActive(2) }">
-                                <a data-toggle="tab" data-target="#2" data-ng-click="tabId = 2">Address</a>
+                            <li class="text-left" ng-class="{'active in' : getActive(2) }">
+                                <a toggle="tab" target="#3" ng-click="tabId = 2">Tax</a>
                             </li>
-                            <li class="text-left" data-ng-class="{'active in' : getActive(3) }">
-                                <a data-toggle="tab" data-target="#3" data-ng-click="tabId = 3">Tax</a>
+                            <li class="text-left" ng-class="{'active in' : getActive(3) }">
+                                <a toggle="tab" target="#2" ng-click="tabId = 3">Address</a>
+                            </li>
+                            <li class="text-left" ng-class="{'active in' : getActive(4) }">
+                                <a toggle="tab" target="#2" ng-click="tabId = 4">Communication</a>
                             </li>
                         </ul>
                         <i class="fa fa-fw"></i>
                         <div class="tab-content">
-                            <div id="#1" class="tab-pane fade" data-ng-class="{'active in' : getActive(1) }">
+                            <div id="#1" class="tab-pane fade" ng-class="{'active in' : getActive(1) }">
                                 <div ng-include="'templates/customer/customer_details.html'"></div>
                             </div>
-                            <div id="#2" class="tab-pane fade" data-ng-class="{'active in' : getActive(2) }">
-                                <div ng-include="'templates/address.html'" />
-                            </div>
-                            <div id="#3" class="tab-pane fade" data-ng-class="{'active in' : getActive(3) }">
+                            <div id="#2" class="tab-pane fade" ng-class="{'active in' : getActive(2) }">
                                 <div ng-include="'templates/customer/customer_tax_details.html'"></div>
                             </div>
+                            <div id="#3" class="tab-pane fade" ng-class="{'active in' : getActive(3) }">
+                                <div ng-include="'templates/address.html'" />
+                            </div>
+                            <div id="#4" class="tab-pane fade" ng-class="{'active in' : getActive(4) }">
+                                <div ng-include="'templates/communication.html'" />
+                            </div>
+
                         </div>
                     </div>
                 </div>

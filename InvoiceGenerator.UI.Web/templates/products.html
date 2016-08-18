@@ -1,33 +1,39 @@
 ﻿<div class="panel panel-default">
-    <div class="panel-heading" style="padding-top: 4px; padding-bottom: 4px;">
-        <div data-ng-include="'templates/toolbar.html'" />
+  <div class="panel-heading" style="padding-top: 4px; padding-bottom: 4px;">
+    <div ng-include="'templates/toolbar.html'" />
+  </div>
+  <div class="panel-body">
+    <div ng-include="'templates/busy.html'" ng-show="isBusy"></div>
+    <div class="row" ng-show="!isBusy">
+      <div class="col-md-3" ng-repeat="i in activeList">
+        <div class="box box-widget widget-user">
+          <div class="widget-user-header bg-primary">
+            <div class="info-box-icon" uib-tooltip="currency">
+              <i class="fa {{i.currency}} text-white"></i>
+            </div>
+            <h3 class="widget-user-username info-box-text"><label style="cursor: pointer;" ng-click="createOrEdit(i.id)">{{i.productName}}</label></h3>
+            <label class="description-text">{{i.countryCode}}</label>
+          </div>
+          <div class="box-footer">
+            <div class="row">
+              <div class="col-sm-6 border-right">
+                <div class="description-block">
+                  <h5 class="description-header">{{i.quantity}}</h5>
+                  <span class="description-text">Quantity available</span>
+                </div>
+                <!-- /.description-block -->
+              </div>
+              <div class="col-sm-6">
+                <div class="description-block">
+                  <h5 class="description-header">{{i.price}}</h5>
+                  <span class="description-text">price / unit / month</span>
+                </div>
+                <!-- /.description-block -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="panel-body">
-        <div ng-include="'templates/busy.html'" ng-show="isBusy"></div>
-        <table class="table table-condensed table-bordered" ng-show="!isBusy">
-            <thead>
-                <tr class="text-nowrap">
-                    <th style="width: 1%"><span class="fa fa-lg fa-fw" data-ng-click="toggleAll()" data-ng-class="{'fa-check-square': isAllSelected, 'fa-square-o':!isAllSelected}"></span></th>
-                    <th style="width: 30%">Product Name<span class="pull-right fa fa-fw" style="cursor: pointer" data-ng-click="changeSort('name')" data-ng-class="sortIcon()" data-ng-show="sortType == 'name'"></span></th>
-                    <th style="width: 25%">Price/Unit/Month</th>
-                    <th style="width: 10%">Stock</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-show="activeList.length == 0">
-                    <td style="width: 1%"></td>
-                    <td><i class="fa fa-life-ring fa-2x"></i> No records found.</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr data-ng-repeat="i in activeList | orderBy:tab.sortColumn:sortReverse | filter:searchItem" ng-show="activeList.length > 0">
-                    <td style="width: 1%"><span class="fa fa-lg fa-fw" data-ng-click="optionToggled(i)" data-ng-class="{'fa-check-square': i.selected, 'fa-square-o':!i.selected}"></span></td>
-                    <td><a data-ng-click="createOrEdit(i.id)" style="cursor: pointer;">{{i.productName}}</a></td>
-                    <td><span class="fa {{i.currency}}"></span>{{i.price }}</td>
-                    <td>{{i.quantity | number}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  </div>
 </div>

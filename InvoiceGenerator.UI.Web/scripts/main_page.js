@@ -1,6 +1,11 @@
-﻿var module = angular.module('main_page', ['ngRoute', 'ui.bootstrap']);
+﻿var module = angular.module('main_page', ['ngRoute', 'ui.bootstrap', 'ngFileUpload']);
 
 module.config(function($routeProvider) {
+    // $routeProvider.when("/", {
+    //     controller: "vController",
+    //     templateUrl: "templates/dashboard.html"
+    // });
+
     $routeProvider.when("/", {
         controller: "vController",
         templateUrl: "templates/main_page.html"
@@ -11,11 +16,11 @@ module.config(function($routeProvider) {
     });
 });
 
-module.controller('vController', ['$scope', '$http', 'dataService', '$uibModal', function($scope, $http, dataService, $uibModal) {
+module.controller('vController', ['$scope', '$http', 'dataService', '$uibModal', '$filter', '$sce', function($scope, $http, dataService, $uibModal, $filter, $sce) {
     $scope.data = dataService;
     $scope.sortReverse = false;
     $scope.searchItem = '';
-    $scope.tab = dataService.tabs[3];
+    $scope.tab = dataService.tabs[4]; //set this element to chagne default tab. index 0 will show first tab.
 
     $scope.getActive = function(item) {
         return item === parseInt($scope.tab.id);
@@ -27,34 +32,38 @@ module.controller('vController', ['$scope', '$http', 'dataService', '$uibModal',
         dataService.getEntity($scope.tab.id, false)
             .then(function(data) {
                 $scope.activeList = data;
-            }, function() {})
+            }, function() {
+                $scope.activeList = [];
+            })
             .finally(function() {
                 $scope.isBusy = false;
+                if ($scope.tab.id == 5) {
+                    $scope.animateProgress();
+                }
             });
     }
 
     $scope.getItems($scope.tab);
 
-    $scope.addressTrim = function(address, length) {
+    $scope.animateProgress = function() {
+        $('.progress-bar').each(function() {
+            var bar_value = $(this).attr('aria-valuenow') + '%';
+            $(this).animate({
+                width: bar_value
+            }, {
+                duration: 1000
+            });
+        });
+    };
 
-        if (address == undefined) {
-            return '';
-        }
-
-        var arr = [];
-        for (var atr in address) {
-            if (address.hasOwnProperty(atr) && address[atr] && address[atr].length > 0 && atr !== 'phone') {
-                arr.push(address[atr]);
-            }
-        }
-
-        var result = arr.join();
-        result += (arr.length > 0 ? '. phone:' + address.phone : address.phone);
-
-        if (result.length > length) {
-            return result.substring(0, 20) + '...';
-        }
-        return result;
+    $scope.reloadEntities = function() {
+        $scope.isBusy = true;
+        dataService.getEntity($scope.tab.id, true).then(function(data) {
+                $scope.activeList = data;
+            }, function() {})
+            .finally(function() {
+                $scope.isBusy = false;
+            });
     }
 
     //modal popup
@@ -64,11 +73,14 @@ module.controller('vController', ['$scope', '$http', 'dataService', '$uibModal',
         var entity = {};
 
         if (id) {
-            $.each($scope.activeList, function(i, item) {
-                if (item.id === id) {
-                    entity = item;
-                }
-            });
+            entity = $filter('filter')($scope.activeList, {
+                id: id
+            })[0];
+            // $.each($scope.activeList, function(i, item) {
+            //     if (item.id === id) {
+            //         entity = item;
+            //     }
+            // });
         }
 
         $scope.modalInstance = $uibModal.open({
@@ -83,16 +95,16 @@ module.controller('vController', ['$scope', '$http', 'dataService', '$uibModal',
                 modal: function() {
                     return {
                         entity: entity,
-                        scope: $scope
+                        scope: $scope //do we need scope in the popup?
                     };
                 }
             }
         });
 
         $scope.modalInstance.rendered.then(function() {
-            var ctrl = $('i.fa.fa-');
-            if (ctrl && ctrl.length > 0) {
-                ctrl.removeClass('fa-').addClass(entity.currency && entity.currency === '' ? 'fa-inr' : entity.currency);
+            var ctrl = $('i.fa.fa-inr');
+            if (ctrl && ctrl.length > 0 && entity.currency) {
+                ctrl.removeClass('fa-inr').addClass(entity.currency);
             }
         });
 
@@ -101,10 +113,18 @@ module.controller('vController', ['$scope', '$http', 'dataService', '$uibModal',
 
     var onSaveClicked = function(result) {
         $scope.isBusy = true;
-        dataService.saveEntity(result.entity, $scope.tab.uri).then(onSaveSuccess, onSaveFailure);
+        dataService.saveEntity(result.entity, $scope.tab.uri).then(onSaveSuccess(result), onSaveFailure);
     };
 
     var onSaveSuccess = function(result) {
+        if (result.entity.id) {
+            console.log('edit existing item, no need to reload');
+            $scope.isBusy = false;
+            return;
+        }
+
+        console.log("created new item, reload complete list");
+
         dataService.getEntity($scope.tab.id, true).then(function(data) {
                 $scope.activeList = data;
             }, function() {})
@@ -114,40 +134,140 @@ module.controller('vController', ['$scope', '$http', 'dataService', '$uibModal',
     }
 
     var onSaveFailure = function(reason) {
-        //console.log;
+        $scope.isBusy = false;
     }
 
     var onCloseClicked = function(reason) {
-            console.log(reason);
-            entity = {};
+        console.log(reason);
+        entity = {};
+    }
+
+    $scope.getAddressHtml = function(element) {
+        if (element.addressHtml) {
+            return element.addressHtml;
         }
-        //sorting
 
-    $scope.changeSort = function(name) {
-        $scope.sortType = name;
-        $scope.sortReverse = !$scope.sortReverse;
+        var str = '<ul class="nav nav-stacked" style="min-width:250px;">';
+
+        str += '<li><a>' + element.address.address1 + '</a></li>';
+        str += '<li><a>' + element.address.address2 + '</a></li>';
+        str += '<li><a>' + element.address.city + ', ' + element.address.state + ', ' + element.address.zip + '</a></li>'
+        str += '<li><a>' + element.address.countryCode + '</a></li>';
+
+        element.addressHtml = $sce.trustAsHtml(str);
+        return element.addressHtml;
+
     }
 
-    $scope.sortIcon = function() {
-        return $scope.sortReverse ? 'fa-chevron-up' : 'fa-chevron-down';
+    $scope.getCommHtml = function(element) {
+        if (element.commHtml) {
+            return element.commHtml;
+        }
+
+        var str = '<ul class="nav nav-stacked" style="min-width:250px;">';
+        str += '<li><a><i class="fa fa-envelope"></i> ' + element.address.email + '</a></li>';
+        str += '<li><a><i class="fa fa-phone-square"></i> ' + element.address.phone + '</a></li>';
+        if (element.contactName) {
+            str += '<li><a><i class="fa fa-user"></i> ' + element.contactName + '</a></li>';
+        }
+
+        str += '</ul>';
+
+        element.commHtml = $sce.trustAsHtml(str);
+        return element.commHtml;
     }
 
-    //select, unselect, select all functionality
+    $scope.getSwiftHtml = function(element) {
+        if (element.swiftHtml) {
+            return element.swiftHtml;
+        }
 
-    $scope.isAllSelected = false;
+        var str = '<ul class="nav nav-stacked" style="min-width:250px;">'
+        str += '<li><a>' + element.swift.beneficiary + '</a></li>';
+        str += '<li><a>' + element.swift.bankName + '</a></li>';
+        str += '<li><a>' + element.swift.accountNo + '</a></li>';
+        str += '<li><a>' + element.swift.code + '</a></li>';
+        str += '<li><a>' + element.swift.branch + '</a></li>';
+        str += '</ul>';
 
-    $scope.toggleAll = function() {
-        $scope.isAllSelected = !$scope.isAllSelected;
-        angular.forEach($scope.activeList, function(itm) {
-            itm.selected = $scope.isAllSelected;
+        element.swiftHtml = $sce.trustAsHtml(str);
+        return element.swiftHtml;
+    }
+
+    $scope.getIfscHtml = function(element) {
+        if (element.ifscHtml) {
+            return element.ifscHtml;
+        }
+
+        var str = '<ul class="nav nav-stacked" style="min-width:250px;">'
+        str += '<li><a>' + element.ifsc.beneficiary + '</a></li>';
+        str += '<li><a>' + element.ifsc.bankName + '</a></li>';
+        str += '<li><a>' + element.ifsc.accountNo + '</a></li>';
+        str += '<li><a>' + element.ifsc.code + '</a></li>';
+        str += '<li><a>' + element.ifsc.branch + '</a></li>';
+        str += '</ul>';
+
+        element.ifscHtml = $sce.trustAsHtml(str);
+        return element.ifscHtml;
+    }
+
+    $scope.getChequeHtml = function(element) {
+        if (element.chequeHtml) {
+            return element.chequeHtml;
+        }
+
+        var str = '<ul class="nav nav-stacked" style="min-width:250px;"><li><a>' + element.cheque.bankName + '</a></li></ul>';
+
+        element.chequeHtml = $sce.trustAsHtml(str);
+        return element.chequeHtml;
+    }
+
+    $scope.getCompanyTaxesHtml = function(element) {
+
+        if (element.companyTaxesHtml) {
+            return element.companyTaxesHtml;
+        }
+
+        var str = '<ul class="nav nav-stacked" style="min-width:250px;">';
+        str += '<li><a>' + element.tax.serviceTaxNo + '<span class="badge pull-right">Service tax no</span></a></li>';
+        str += '<li><a>' + element.tax.tin + '<span class="badge pull-right">TIN</span></a></li>';
+        str += '<li><a>' + element.tax.pan + '<span class="badge pull-right">PAN</span></a></li>';
+        str += '<li><a>' + element.tax.cin + '<span class="badge pull-right">CIN</span></a></li>';
+        str += '</ul>';
+
+        element.companyTaxesHtml = $sce.trustAsHtml(str);
+        return element.companyTaxesHtml;
+    }
+
+    $scope.getTaxesHtml = function(element) {
+
+        if (element.taxHtml) {
+            return element.taxHtml;
+        }
+
+        var str = '<ul class="nav nav-stacked" style="min-width:250px;">';
+        $.each(element.taxes, function(i, item) {
+            str += '<li><a>' + item.name + '<span class="pull-right badge">' + item.percent + '%</span></a></li>';
         });
+        str += '</ul>';
 
+        element.taxHtml = $sce.trustAsHtml(str);
+        return element.taxHtml;
     }
 
-    $scope.optionToggled = function(i) {
-        i.selected = !i.selected;
-        $scope.isAllSelected = $scope.activeList.every(function(itm) {
-            return itm.selected;
-        });
+    $scope.getSupportHtml = function(element) {
+        if (element.supportHtml) {
+            return element.supportHtml;
+        }
+
+        var str = '<ul class="nav nav-stacked" style="min-width:250px;">';
+        str += '<li><a><i class="fa fa-envelope"></i> ' + element.support.email + '</a></li>';
+        str += '<li><a><i class="fa fa-phone-square"></i> ' + element.support.phone + '</a></li>';
+
+        str += '</ul>';
+
+        element.supportHtml = $sce.trustAsHtml(str);
+        return element.supportHtml;
     }
+
 }]);

@@ -1,70 +1,61 @@
 (function() {
-    var module = angular.module('main_page');
+  var module = angular.module('main_page');
 
-    module.controller('customerController', ['$scope', '$uibModalInstance', 'modal', function($scope, $uibModalInstance, modal) {
-        $scope.modal = modal;
+  module.controller('customerController', ['$scope', '$uibModalInstance', 'modal', 'dataService', function($scope, $uibModalInstance, modal, dataService) {
+    $scope.modal = modal;
 
-        $scope.text = /^[a-zA-Z0-9\s.\-,@]+$/;
-        $scope.decimal = /^\d*(\.\d+)?$/;
-        $scope.email = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|in|co\.in|edu)\b$/;
-        $scope.phone = /^(\+\d{1,3} )?\d{2,4}[\- ]?\d{3,4}[\- ]?\d{4}$/;
-        $scope.zip = "^\d{5,6}([\-]?\d{4})?$"
+    $scope.entity = modal.entity;
 
-        $scope.entity = modal.entity;
+    $scope.ds = dataService;
 
-        $scope.tabId = 1;
+    $scope.entity.taxHtml = '';
+    $scope.entity.commHtml = '';
+    $scope.entity.addressHtml = '';
 
-        $scope.getActive = function(item) {
-            return item === parseInt($scope.tabId);
+    $scope.tabId = 1;
+
+    $scope.countries = dataService.countries;
+
+    $scope.tax = {};
+
+    $scope.getActive = function(item) {
+      return item === parseInt($scope.tabId);
+    }
+
+    $scope.close = function() {
+      var entity = $scope.entity;
+      $uibModalInstance.dismiss("user closed the dialog");
+    }
+
+    $scope.save = function() {
+
+      var ctrl = $('input[name="currency-picker"]');
+      if (ctrl && ctrl.length > 0) {
+        if ($('button[name="currency-picker"]').hasClass('ng-touched')) {
+          $scope.entity.currency = ctrl.val();
         }
+      }
 
-        $scope.close = function() {
-            var entity = $scope.entity;
-            $uibModalInstance.dismiss("user closed the dialog");
-        }
+      $uibModalInstance.close({
+        entity: $scope.entity,
+        entityName: modal.entityName
+      });
+    }
 
-        $scope.save = function() {
-            $uibModalInstance.close({
-                entity: $scope.entity,
-                entityName: modal.entityName
-            });
-        }
+    $scope.addTax = function() {
+      var tax = {};
+      angular.copy($scope.tax, tax);
+      if (!$scope.entity.taxes) {
+        $scope.entity.taxes = [];
+      }
+      $scope.entity.taxes.push(tax);
+      $scope.tax = {};
+    }
 
-        $scope.getIcon = function(ctrl) {
-            if (!ctrl) {
-                return null;
-            }
+    $scope.deleteTax = function(item) {
+      var index = $scope.entity.taxes.indexOf(item);
+      $scope.entity.taxes.splice(index, 1);
+    }
 
-            if (ctrl.$invalid || !ctrl.$valid) {
-                return 'fa fa-times text-danger';
-            } else if (ctrl.$valid) {
-                return 'fa fa-check text-success';
-            }
-        }
-
-        $scope.getMsg = function(ctrl, msg, length, type) {
-            if (!ctrl) {
-                return null;
-            }
-
-            if (ctrl.$error.required) {
-                return msg + ' is required.';
-            }
-
-            if (ctrl.$error.maxlength) {
-                return msg + ' exceeding max length ' + length + ' allowed.';
-            }
-
-            if (ctrl.$error.pattern) {
-                return 'Please enter valid ' + msg + '.';
-            }
-
-            if (ctrl.$valid) {
-                if (ctrl.$name === 'comments') {
-                    return msg + ' are valid.'
-                }
-                return msg + ' is valid.'
-            }
-        };
-    }]);
+  }]);
 })();

@@ -1,72 +1,19 @@
 <ul class="list-group">
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="swiftbeneficiary">Beneficiary:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.swiftbeneficiary, 'Beneficiary ')}}">
-        <div class="input-group">
-          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
-          <input name="swiftbeneficiary" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.swift.beneficiary" data-ng-pattern="text" placeholder="Imaginary Solutions Inc." />
-          <span class="input-group-addon"><i data-ng-class="getIcon(lf.swiftbeneficiary)"></i></span>
-        </div>
-      </div>
-    </div>
+    <input name="swiftbeneficiary" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.swift.beneficiary" ng-pattern="ds.text" placeholder="beneficiary" uib-tooltip="{{ds.getMessage(lf.swiftbeneficiary, 'Beneficiary ')}}"
+    />
   </li>
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="swiftbank">Bank Name:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.swiftbank, 'Bank Name ')}}">
-        <div class="input-group">
-          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
-          <input name="swiftbank" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.swift.bankName" data-ng-pattern="text" placeholder="Bank Name" />
-          <span class="input-group-addon"><i data-ng-class="getIcon(lf.swiftbank)"></i></span>
-        </div>
-      </div>
-    </div>
+    <input name="swiftbank" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.swift.bankName" ng-pattern="ds.text" placeholder="Bank Name" uib-tooltip="{{ds.getMessage(lf.swiftbank, 'Bank Name ')}}" />
   </li>
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="swiftaccountNo">Account No:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.swiftaccountNo, 'Account No ')}}">
-        <div class="input-group">
-          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
-          <input name="swiftaccountNo" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.swift.accountNo" data-ng-pattern="text" placeholder="Account No" />
-          <span class="input-group-addon"><i data-ng-class="getIcon(lf.swiftaccountNo)"></i></span>
-        </div>
-      </div>
-    </div>
+    <input name="swiftaccountNo" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.swift.accountNo" ng-pattern="ds.text" placeholder="Account No" uib-tooltip="{{ds.getMessage(lf.swiftaccountNo, 'Account No ')}}"
+    />
   </li>
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="swiftcode">Swift Code:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.swiftcode, 'SWIFT Code ')}}">
-        <div class="input-group">
-          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
-          <input name="swiftcode" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.swift.code" data-ng-pattern="text" placeholder="SWIFT Code" />
-          <span class="input-group-addon"><i data-ng-class="getIcon(lf.swiftcode)"></i></span>
-        </div>
-      </div>
-    </div>
+    <input name="swiftcode" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.swift.code" ng-pattern="ds.text" placeholder="SWIFT Code" uib-tooltip="{{ds.getMessage(lf.swiftcode, 'SWIFT Code ')}}" />
   </li>
   <li class="list-group-item">
-    <div class="row">
-      <div class="col-md-3">
-        <label for="swiftbranch">Branch Name:</label>
-      </div>
-      <div class="div-input" uib-tooltip="{{getMsg(lf.swiftbranch, 'Branch Name ')}}">
-        <div class="input-group">
-          <span class="input-group-addon"><i style="padding-top: 4px;" class="fa fa-lg fa-question-circle"></i></span>
-          <input name="swiftbranch" type="text" required class="form-control" data-ng-disabled="isBusy" data-ng-maxlength="100" data-ng-model="entity.swift.branch" data-ng-pattern="text" placeholder="Branch Name" />
-          <span class="input-group-addon"><i data-ng-class="getIcon(lf.swiftbranch)"></i></span>
-        </div>
-      </div>
-    </div>
+    <input name="swiftbranch" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.swift.branch" ng-pattern="ds.text" placeholder="Branch Name" uib-tooltip="{{ds.getMessage(lf.swiftbranch, 'Branch Name ')}}" />
   </li>
 </ul>
