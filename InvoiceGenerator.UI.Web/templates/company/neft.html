@@ -1,19 +1,19 @@
-<ul class="list-group">
-  <li class="list-group-item">
+<ul class="nav nav-stacked-input">
+  <li>
     <input name="ifscbeneficiary" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.ifsc.beneficiary" ng-pattern="ds.text" placeholder="beneficiary" uib-tooltip="{{ds.getMessage(lf.ifscbeneficiary, 'Beneficiary ')}}"
     />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="ifscbank" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.ifsc.bankName" ng-pattern="ds.text" placeholder="Bank Name" uib-tooltip="{{ds.getMessage(lf.ifscbank, 'Bank Name ')}}" />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="ifscaccountNo" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.ifsc.accountNo" ng-pattern="ds.text" placeholder="Account No" uib-tooltip="{{ds.getMessage(lf.ifscaccountNo, 'Account No ')}}"
     />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="ifsccode" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.ifsc.code" ng-pattern="ds.text" placeholder="IFSC/NEFT Code" uib-tooltip="{{ds.getMessage(lf.ifsccode, 'IFSC/NEFT Code ')}}" />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="ifscbranch" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.ifsc.branch" ng-pattern="ds.text" placeholder="Branch Name" uib-tooltip="{{ds.getMessage(lf.ifscbranch, 'Branch Name ')}}" />
   </li>
 </ul>

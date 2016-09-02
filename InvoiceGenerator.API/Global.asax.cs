@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using InvoiceGenerator.API.DependencyResolution;
 using InvoiceGenerator.Data;
+using InvoiceGenerator.Entities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using StructureMap;
@@ -48,8 +52,23 @@ namespace InvoiceGenerator.API
       FilterProviders.Providers.Add(container.GetInstance<IFilterProvider>());
     }
 
+    //private void CreateMapper()
+    //{
+    //  Mapper.Initialize(expression => expression.CreateMap<Invoice, Invoice>()
+    //    .ForMember(invoice => invoice.PdfStream, opt => opt.Ignore())
+    //    .ForAllMembers(cfg => cfg.UseDestinationValue())
+    //    );
+
+    //  //MapperConfiguration configuration =
+    //  //  new MapperConfiguration(expression =>
+    //  //    expression.AddProfile(new MappingProfile()));
+    //  //return configuration.CreateMapper();
+    //}
+
     private IContainer GetContainer()
     {
+      //CreateMapper();
+
       var connectionString = ConfigurationManager.AppSettings["connectionString"];
       IContainer container = new Container(expression =>
       {
@@ -61,6 +80,12 @@ namespace InvoiceGenerator.API
           .Is(connectionString)
           .Ctor<string>("databaseName")
           .Is(ConfigurationManager.AppSettings["databaseName"]);
+        expression.For<IInvoiceProcessor>()
+          .HybridHttpOrThreadLocalScoped()
+          .Use<InvoiceProcessor>()
+          .Ctor<string>("path")
+          .Is(Path.GetDirectoryName(Uri.UnescapeDataString((new UriBuilder(Assembly.GetExecutingAssembly().CodeBase)).Path)));
+        //expression.For<IMapper>().HybridHttpOrThreadLocalScoped().Use(Mapper.Instance);
       });
       return container;
     }

@@ -41,7 +41,7 @@
         arrowNextIconClass: 'fa fa-arrow-right',
         arrowPrevIconClass: 'fa fa-arrow-left',
         cols: 4,
-        icon: 'fa fa-inr',
+        icon: '',
         iconset: 'fontawesome',
         header: false,
         labelHeader: '{0} / {1}',

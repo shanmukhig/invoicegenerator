@@ -56,7 +56,9 @@ namespace InvoiceGenerator
         case "usd":
           return "Dollars";
         default:
-          return string.Empty;
+          currency = currency.Replace("fa-", string.Empty);
+          currency = currency.Substring(0, 1).ToUpper() + currency.Substring(1);
+          return currency;
       }
     }
   }

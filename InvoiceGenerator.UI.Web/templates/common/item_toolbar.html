@@ -1,0 +1,6 @@
+﻿<div class="navbar-right panel_toolbox">
+  <span ng-click="$parent.showDetails = !$parent.showDetails" class="btn btn-default btn-sm btn-smx" ng-disabled="isBusy"><i class="fa fa-sm text-muted" ng-class="{'fa-chevron-down': $parent.showDetails, 'fa-chevron-up':!$parent.showDetails}"></i></span>
+  <span ng-show="{{$parent.tab.id == 4}}" ng-click="downloadPdf(i.id, i.invoiceNo)" class="btn btn-default btn-sm btn-smx" ng-disabled="isBusy"><i class="fa fa-sm text-muted fa-file-pdf-o"></i></span>
+  <span ng-click="createOrEdit(i.id)" class="btn btn-default btn-sm btn-smx" ng-disabled="isBusy"><i class="fa fa-pencil text-muted"></i></span>
+  <span ng-click="delete(i.id)" class="btn btn-default btn-sm btn-smx" ng-disabled="isBusy"><i class="fa fa-trash text-muted"></i></span>
+</div>

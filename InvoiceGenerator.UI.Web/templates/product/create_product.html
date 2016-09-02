@@ -1,0 +1,38 @@
+﻿<link rel="stylesheet" href="content/bootstrap-iconpicker.min.css" />
+<form name="lf" novalidate ng-submit="save()">
+  <div class="work_prog" ng-show="isBusy">
+    <div ng-include="'templates/common/busy.html'"></div>
+  </div>
+  <div class="x_panel x_panel_nb" ng-show="!isBusy">
+    <div class="x_title">
+      <div class="navbar-right">
+        <div ng-include="'templates/common/popup_toolbar.html'"></div>
+      </div>
+      <span class="span-format-sm cap">{{tabName}} details</span>
+    </div>
+    <div class="x-content">
+      <ul class="nav nav-stacked-input">
+        <li>
+          <input name="productName" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.productName" required ng-pattern="ds.text" placeholder="product name" uib-tooltip="{{ds.getMessage(lf.productName, 'Product Name')}}" />
+        </li>
+        <li>
+          <input name="price" type="number" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.price" ng-pattern="ds.decimal" placeholder="price/unit/month" uib-tooltip="{{ds.getMessage(lf.price, 'Price')}}"/>
+        </li>
+        <li>
+          <input name="quantity" required type="number" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.quantity" ng-pattern="ds.integer" placeholder="available quantity" uib-tooltip="{{ds.getMessage(lf.quantity, 'Quantity')}}" />
+        </li>
+        <li>
+          <select class="form-control" name="country" required ng-model="entity.countryCode" uib-tooltip="{{ds.getMessage(lf.country, 'Country')}}">
+            <option value="">please select a country</option>
+            <option ng-repeat="i in ds.countries" value="{{i.text}}">{{i.text}}</option>
+          </select>
+        </li>
+        <li>
+          <input name="comments" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.comments" ng-pattern="ds.text" placeholder="comments" uib-tooltip="{{ds.getMessage(lf.comments, 'Comments')}}" />
+        </li>
+      </ul>
+    </div>
+  </div>
+</form>
+<script src="scripts/iconset-fontawesome-4.0.0.min.js" type="text/javascript"></script>
+<script src="scripts/bootstrap-iconpicker.js" type="text/javascript"></script>

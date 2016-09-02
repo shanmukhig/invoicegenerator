@@ -1,47 +1,52 @@
-<ul class="list-group">
-  <li class="list-group-item">
-    <div class="div-input" uib-tooltip="{{getMsg(lf.invoiceStartDate, 'Invoice start date')}}">
-      <div class="input-group">
-        <input type="text" name="invoiceStartDate" class="form-control" uib-datepicker-popup="ds.dateFormat" ng-model="entity.startDate" is-open="opened1" readonly datepicker-options="ds.dateOptions" required close-text="Close" placeholder="invoice start period"
-        />
-        <span class="input-group-addon" ng-click="opened1=true"><i class="fa fa-lg fa-calendar"></i>  <i class="fa fa-sm fa-caret-down"></i></span>
-      </div>
+<ul class="nav nav-stacked-input">
+  <li>
+    <div class="input-group" uib-tooltip="{{ds.getMessage(lf.invoiceStartDate, 'Invoice start date')}}">
+      <input type="text" name="invoiceStartDate" class="form-control"
+             uib-datepicker-popup="{{ds.dateFormat}}" ng-model="entity.startDate" is-open="opened1" 
+             readonly datepicker-options="ds.dateOptions" required close-text="Close" placeholder="invoice start period"/>
+      <span class="input-group-addon" ng-click="opened1=true"><i class="fa fa-lg fa-calendar"></i> <i class="fa fa-sm fa-caret-down"></i></span>
     </div>
   </li>
-  <li class="list-group-item">
-    <div class="input-group" uib-tooltip="{{getMsg(lf.invoiceEndDate, 'Invoice end date')}}">
-      <input type="text" name="invoiceEndDate" class="form-control" uib-datepicker-popup="ds.dateFormat" ng-model="entity.endDate" is-open="opened2" readonly datepicker-options="ds.dateOptions" required close-text="Close" placeholder="invoice end period" />
-      <span class="input-group-addon" ng-click="opened2=true"><i class="fa fa-lg fa-calendar"></i>  <i class="fa fa-sm fa-caret-down"></i></span>
+  <li>
+    <div class="input-group" uib-tooltip="{{ds.getMessage(lf.invoiceEndDate, 'Invoice end date')}}">
+      <input type="text" name="invoiceEndDate" class="form-control" uib-datepicker-popup="{{ds.dateFormat}}" 
+             ng-model="entity.endDate" is-open="opened2" readonly datepicker-options="ds.dateOptions" required 
+             close-text="Close" placeholder="invoice end period"/>
+      <span class="input-group-addon" ng-click="opened2=true"><i class="fa fa-lg fa-calendar"></i> <i class="fa fa-sm fa-caret-down"></i></span>
     </div>
   </li>
-  <li class="list-group-item">
-    <div class="input-group" uib-tooltip="{{getMsg(lf.invoiceDueDate, 'Invoice due date')}}">
-      <input type="text" name="invoiceDueDate" class="form-control" uib-datepicker-popup="ds.dateFormat" ng-model="entity.dueDate" is-open="opened3" readonly datepicker-options="ds.dateOptions" required close-text="Close" placeholder="invoice due date" />
-      <span class="input-group-addon" ng-click="opened3=true"><i class="fa fa-lg fa-calendar"></i>  <i class="fa fa-sm fa-caret-down"></i></span>
+  <li>
+    <div class="input-group" uib-tooltip="{{ds.getMessage(lf.invoiceDueDate, 'Invoice due date')}}">
+      <input type="text" name="invoiceDueDate" class="form-control" uib-datepicker-popup="{{ds.dateFormat}}" 
+             ng-value="entity.dueDate|date:ds.dateFormat" ng-model="entity.dueDate" is-open="opened3" 
+             readonly datepicker-options="ds.dateOptions" required close-text="Close" placeholder="invoice due date" />
+      <span class="input-group-addon" ng-click="opened3=true"><i class="fa fa-lg fa-calendar"></i> <i class="fa fa-sm fa-caret-down"></i></span>
     </div>
   </li>
-  <li class="list-group-item">
-    <div class="input-group" uib-tooltip="{{getMsg(lf.invoiceBillDate, 'Invoice bill date')}}">
-      <input type="text" name="invoiceBillDate" class="form-control" uib-datepicker-popup="ds.dateFormat" ng-model="entity.billDate" is-open="opened4" readonly datepicker-options="ds.dateOptions" required close-text="Close" placeholder="invoice date" />
-      <span class="input-group-btn" ng-click="opened4=true"><i class="fa fa-lg fa-calendar"></i>  <i class="fa fa-sm fa-caret-down"></i></span>
+  <li>
+    <div class="input-group" uib-tooltip="{{ds.getMessage(lf.invoiceBillDate, 'Invoice bill date')}}">
+      <input type="text" ng-value="entity.billDate|date:ds.dateFormat" name="invoiceBillDate" 
+             class="form-control" uib-datepicker-popup="{{ds.dateFormat}}" ng-model="entity.billDate" 
+             is-open="opened4" readonly datepicker-options="ds.dateOptions" required close-text="Close" placeholder="invoice date" />
+      <span class="input-group-addon" ng-click="opened4=true"><i class="fa fa-lg fa-calendar"></i>  <i class="fa fa-sm fa-caret-down"></i></span>
     </div>
   </li>
-  <li class="list-group-item">
-    <div class="input-group" uib-tooltip="{{getMsg(lf.previousAmount, 'Previous amount')}}">
+  <li>
+    <div class="input-group" uib-tooltip="{{ds.getMessage(lf.previousAmount, 'Previous amount')}}">
       <input name="previousAmount" type="number" step="1.0" class="form-control" ng-maxlength="20" ng-pattern="ds.decimal" required ng-model="entity.previousAmt" placeholder="previous amount" />
-      <span class="input-group-addon"><i class="fa fa-lg {{bill.currency}}"></i></span>-->
+      <span class="input-group-addon"><i class="fa fa-lg {{(entity.currency || 'fa-question-circle' )}}"></i></span>
     </div>
   </li>
-  <li class="list-group-item">
-    <div class="input-group" uib-tooltip="{{getMsg(lf.previousPayment, 'Previous payment')}}">
+  <li>
+    <div class="input-group" uib-tooltip="{{ds.getMessage(lf.previousPayment, 'Previous payment')}}">
       <input name="previousPayment" type="number" step="1.0" class="form-control" ng-maxlength="20" ng-pattern="ds.decimal" required ng-model="entity.previousPayment" placeholder="previous payment" />
-      <span class="input-group-addon"><i class="fa fa-lg {{bill.currency}}"></i></span>-->
+      <span class="input-group-addon"><i class="fa fa-lg {{(entity.currency || 'fa-question-circle')}}"></i></span>
     </div>
   </li>
-  <li class="list-group-item">
-    <div class="input-group" uib-tooltip="{{getMsg(lf.adjustments, 'Adjustments')}}">
+  <li>
+    <div class="input-group" uib-tooltip="{{ds.getMessage(lf.adjustments, 'Adjustments')}}">
       <input name="adjustments" type="number" step="1.0" class="form-control" ng-maxlength="20" ng-pattern="ds.decimal" required ng-model="entity.adjustments" placeholder="adjustments" />
-      <span class="input-group-addon"><i class="fa fa-lg {{bill.currency}}"></i></span>
+      <span class="input-group-addon"><i class="fa fa-lg {{(entity.currency||'fa-question-circle')}}"></i></span>
     </div>
   </li>
 </ul>

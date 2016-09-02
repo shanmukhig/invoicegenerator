@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "templates/template.min.html",
+    "inputFiles": [
+      "templates/template.html"
+    ]
+  },
+  {
+    "outputFileName": "templates/format.min.css",
+    "inputFiles": [
+      "templates/format.css"
+    ]
+  }
+]

@@ -1,0 +1,33 @@
+﻿<div class="x_panel x_panel_nt">
+  <div class="x_title">
+    <span class="span-format">{{tab.name}}</span>
+    <div class="navbar-right">
+      <div ng-include="'templates/common/toolbar.html'"></div>
+    </div>
+  </div>
+  <div class="x-content">
+    <div ng-include="'templates/common/busy.html'" ng-show="isBusy"></div>
+    <div class="row" ng-show="!isBusy">
+      <div ng-include="'templates/common/norecords.html'" ng-show="activeList.length == 0"></div>
+      <div class="col-md-3 col-xs-12" ng-repeat="i in activeList" ng-show="activeList.length > 0">
+        <div class="x_panel">
+          <div class="x_title">
+            <div ng-include="'templates/common/item_toolbar.html'"></div>
+            <h3 class="nw">{{i.customerName}}</h3>
+          </div>
+          <div class="x_content" ng-show="!showDetails">
+            <span class="badge bg-gray-n badge-resize">{{i.address.countryCode}}</span>
+            <span class="badge badge-resize bg-gray-n"><i class="fa {{i.currency}} fa-fw"></i></span>
+            <ul class="nav nav-stacked">
+              <li>
+                <a class="licolor" popover-trigger="'mouseenter'" popover-placement="auto" popover-title="Address" uib-popover-html="getAddressHtml(i)">Address</a>
+              </li>
+              <li><a class="licolor" popover-trigger="'mouseenter'" popover-placement="auto" popover-title="Taxes" uib-popover-html="getTaxesHtml(i)">Taxes</a></li>
+              <li><a class="licolor" popover-trigger="'mouseenter'" popover-placement="auto" popover-title="Communication" uib-popover-html="getCommHtml(i)">Communication</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

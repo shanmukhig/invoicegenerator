@@ -34,8 +34,8 @@ namespace InvoiceGenerator.Data
     public async Task<IEnumerable<T>> GetAll()
     {
       IAsyncCursor<T> document = await Collection.FindAsync(new BsonDocument()).ConfigureAwait(false);
+      //Collection.Find(new BsonDocument()).Project<T>(Builders<T>.Projection.Exclude(arg => arg.pdfStream))
       return document.ToEnumerable();
-      ;
     }
 
     public async Task<T> GetById(string id)

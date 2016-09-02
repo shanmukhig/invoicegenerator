@@ -1,19 +1,17 @@
-<ul class="list-group">
-  <li class="list-group-item">
-    <div class="div-input" uib-tooltip="{{getMsg(lf.companyName, 'Company Name')}}">
-      <select class="form-control" name="invoiceNo" required ng-model="entity.companyId" ng-change="setCountry()">
-          <option value="">please select a company</option>
-          <option ng-repeat="i in companies" value="{{i.id}}">{{i.companyName}} ({{i.address.countryCode}})</option>
-        <select>
-    </div>
+<ul class="nav nav-stacked-input">
+  <li>
+    <select class="form-control" name="invoiceNo" required ng-model="entity.companyId" ng-change="setCountry()" uib-tooltip="{{ds.getMessage(lf.companyName, 'Company Name')}}">
+      <option value="">please select a company</option>
+      <option ng-repeat="i in companies" value="{{i.id}}">{{i.companyName}} ({{i.address.countryCode}})</option>
+    </select>
   </li>
-  <li class="list-group-item">
-          <select class="form-control" name="customerName" required ng-model="entity.customerId" uib-tooltip="{{getMsg(lf.customerName, 'Customer name')}}">
-                <option value="">please select a customer</option>
-                            <option ng-repeat="i in filteredCustomers" value="{{i.id}}">{{i.customerName}} ({{i.address.countryCode}})</option>
-                          </select>
+  <li>
+    <select class="form-control" name="customerName" required ng-model="entity.customerId" uib-tooltip="{{ds.getMessage(lf.customerName, 'Customer name')}}">
+      <option value="">please select a customer</option>
+      <option ng-repeat="i in filteredCustomers" value="{{i.id}}">{{i.customerName}} ({{i.address.countryCode}})</option>
+    </select>
   </li>
-  <li class="list-group-item">
-    <input name="comments" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.comments" ng-pattern="ds.text" placeholder="comments" uib-tooltip="{{getMsg(lf.comments, 'Comments')}}" />
+  <li>
+    <input name="comments" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.comments" ng-pattern="ds.text" placeholder="comments" uib-tooltip="{{ds.getMessage(lf.comments, 'Comments')}}" />
   </li>
 </ul>

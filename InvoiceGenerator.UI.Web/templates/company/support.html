@@ -1,9 +1,9 @@
-<ul class="list-group">
-  <li class="list-group-item">
+<ul class="nav nav-stacked-input">
+  <li>
     <input name="supportPhone" type="tel" required class="form-control" ng-disabled="isBusy" ng-maxlength="20" ng-model="entity.support.phone" ng-pattern="ds.phone" placeholder="support phone" uib-tooltip="{{ds.getMessage(lf.supportPhone, 'Support Phone ')}}"
     />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="supportEmail" type="email" required class="form-control" ng-disabled="isBusy" ng-maxlength="20" ng-model="entity.support.email" ng-pattern="ds.email" placeholder="support email" uib-tooltip="{{ds.getMessage(lf.supportEmail, 'Support Email ')}}"
     />
   </li>

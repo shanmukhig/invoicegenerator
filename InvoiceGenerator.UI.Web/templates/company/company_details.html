@@ -1,20 +1,20 @@
 <link rel="stylesheet" href="content/bootstrap-iconpicker.min.css" />
-<ul class="list-group">
-  <li class="list-group-item">
+<ul class="nav nav-stacked-input">
+  <li>
     <input name="companyName" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.companyName" required ng-pattern="ds.text" placeholder="company name" uib-tooltip="{{ds.getMessage(lf.companyName, 'Company Name')}}" />
   </li>
-  <li class="list-group-item">
+  <li>
     <div name="logo" style="cursor:pointer" class="button form-control" accept="image/*" ng-max-size="1MB" ngf-select="convertToBase64($file)" ngf-multiple="false" uib-tooltip="{{ds.getMessage(lf.logo, 'Company Logo')}}">Plese select a logo</div>
   </li>
-  <li class="list-group-item">
+  <li>
     <button class="btn btn-default currencypicker" name="currency-picker" ng-model="entity.currency" role="iconpicker" uib-tooltip="{{ds.getMessage(lf.currency, 'Currency')}}"></button>
   </li>
-  <li class="list-group-item">
-    <input name="comments" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.comments" ng-pattern="ds.text" placeholder="comments" uib-tooltip="{{ds.getMessage(lf.comments, ' Comments ')}}" />
+  <li>
+    <input name="comments" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.comments" ng-pattern="ds.text" placeholder="comments" uib-tooltip="{{ds.getMessage(lf.comments, ' Comments ')}}"/>
+  </li>
+  <li>
+    <img ng-src="{{entity.logo}}" class="img-thumbnail" ng-show="entity.logo" />
   </li>
 </ul>
-<div class="container">
-  <img ng-src="{{entity.logo}}" class="img-thumbnail" />
-</div>
 <script src="scripts/iconset-fontawesome-4.0.0.min.js" type="text/javascript"></script>
 <script src="scripts/bootstrap-iconpicker.js" type="text/javascript"></script>

@@ -1,19 +1,19 @@
-<ul class="list-group">
-  <li class="list-group-item">
+<ul class="nav nav-stacked-input">
+  <li>
     <input name="swiftbeneficiary" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.swift.beneficiary" ng-pattern="ds.text" placeholder="beneficiary" uib-tooltip="{{ds.getMessage(lf.swiftbeneficiary, 'Beneficiary ')}}"
     />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="swiftbank" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.swift.bankName" ng-pattern="ds.text" placeholder="Bank Name" uib-tooltip="{{ds.getMessage(lf.swiftbank, 'Bank Name ')}}" />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="swiftaccountNo" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.swift.accountNo" ng-pattern="ds.text" placeholder="Account No" uib-tooltip="{{ds.getMessage(lf.swiftaccountNo, 'Account No ')}}"
     />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="swiftcode" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.swift.code" ng-pattern="ds.text" placeholder="SWIFT Code" uib-tooltip="{{ds.getMessage(lf.swiftcode, 'SWIFT Code ')}}" />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="swiftbranch" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.swift.branch" ng-pattern="ds.text" placeholder="Branch Name" uib-tooltip="{{ds.getMessage(lf.swiftbranch, 'Branch Name ')}}" />
   </li>
 </ul>

@@ -1,9 +1,22 @@
-﻿body { font-family: 'Eras Medium ITC' }
+﻿@font-face {
+  font-family: 'Imprima';
+  font-style: normal;
+  font-weight: 500;
+  src: url('templates/fonts/imprima-v4-latin-regular.eot');
+  /* IE9 Compat Modes */
+  src: local('Imprima'), local('Imprima-Regular'), url('templates/fonts/imprima-v4-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('templates/fonts/imprima-v4-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+  url('templates/fonts/imprima-v4-latin-regular.woff') format('woff'), /* Modern Browsers */
+  url('templates/fonts/imprima-v4-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('templates/fonts/imprima-v4-latin-regular.svg#Imprima') format('svg');  /* Legacy iOS */
+}
+
+body { font-family: 'Imprima' }
 
 @media print {
   .col-p-1, .col-p-2, .col-p-3, .col-p-4, .col-p-5, .col-p-6, .col-p-7, .col-p-8, .col-p-9, .col-p-10, .col-p-11, .col-p-12, .col-p-25, .col-p-65 {
     float: left;
-    font-family: 'Eras Medium ITC';
+    font-family: 'Imprima';
     min-height: 1px;
     padding-left: 1px;
     padding-right: 1px;
@@ -28,7 +41,9 @@
   .img {
     -ms-border-radius: 10px;
     border-radius: 10px;
-    overflow: hidden
+    overflow: hidden;
+    height: 50px;
+    width: 250px;
   }
 
   .pdtb {
@@ -83,12 +98,12 @@
 
   .row:after { clear: both }
 
-  .row:before, .row:after {
+  /*.row:before, .row:after {
     content: ' ';
     display: table;
-  }
+  }*/
 
-  .row:after { clear: both }
+  /*.row:after { clear: both }*/
 
   .text-center { text-align: center }
 
@@ -100,19 +115,13 @@
 
   .col-p-11 { width: 91.66666667% }
 
-  .col-p-10 { width: 83.33333333% }
-
   .col-p-9 { width: 75% }
-
-  .col-p-8 { width: 66.66666667% }
 
   .col-p-7 { width: 58.33333333% }
 
   .col-p-65 { width: 57.33333333% }
 
   .col-p-6 { width: 49% }
-
-  .col-p-5 { width: 41.66666667% }
 
   .col-p-4 { width: 33.33333333% }
 
@@ -137,7 +146,7 @@
   }
 
   li {
-    margin-bottom: 0, 5em;
+    margin-bottom: 0.5em;
     margin-top: 0.5em;
   }
 }

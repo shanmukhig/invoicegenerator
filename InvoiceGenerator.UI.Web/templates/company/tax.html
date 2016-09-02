@@ -1,20 +1,15 @@
-<ul class="list-group">
-  <li class="list-group-item">
-    <div class="div-input" uib-tooltip="{{ds.getMessage(lf.serviceTaxNo, 'Service Tax No ')}}">
-      <!--<div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-hashtag"></i></span>-->
-      <input name="serviceTaxNo" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.tax.serviceTaxNo" ng-pattern="ds.text" placeholder="Service Tax Number" />
-      <!--<span class="input-group-addon"><i ng-class="ds.getIcon(lf.serviceTaxNo)"></i></span>
-    </div>-->
-    </div>
+<ul class="nav nav-stacked-input">
+  <li>
+    <input name="serviceTaxNo" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.tax.serviceTaxNo" ng-pattern="ds.text" placeholder="Service Tax Number" uib-tooltip="{{ds.getMessage(lf.serviceTaxNo, 'Service Tax No ')}}"
+    />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="tin" required type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.tax.tin" ng-pattern="ds.text" placeholder="TIN" uib-tooltip="{{ds.getMessage(lf.tin, 'TIN ')}}" />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="pan" required type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.tax.pan" ng-pattern="ds.text" placeholder="PAN" uib-tooltip="{{ds.getMessage(lf.pan, 'PAN ')}}" />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="cin" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.tax.cin" ng-pattern="ds.text" placeholder="CIN" uib-tooltip="{{ds.getMessage(lf.cin, 'CIN ')}}" />
   </li>
 </ul>

@@ -4,6 +4,7 @@ namespace InvoiceGenerator.Entities
 {
   public class Payment : BaseEntity
   {
+    public string InvoiceId { get; set; }
     public DateTime PaymentDate { get; set; }
     public string Comments { get; set; }
     public string InvoiceNo { get; set; }

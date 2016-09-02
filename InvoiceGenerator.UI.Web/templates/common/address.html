@@ -1,0 +1,23 @@
+<ul class="nav nav-stacked-input">
+  <li>
+    <input name="address1" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.address.address1" ng-pattern="ds.text" placeholder="address 1" uib-tooltip="{{ds.getMessage(lf.address1, 'Address 1')}}" />
+  </li>
+  <li>
+    <input name="address2" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.address.address2" ng-pattern="ds.text" placeholder="address 2" uib-tooltip="{{ds.getMessage(lf.address2, 'Address 2')}}" />
+  </li>
+  <li>
+    <input name="city" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.address.city" ng-pattern="ds.text" placeholder="city" uib-tooltip="{{ds.getMessage(lf.city, 'City')}}" />
+  </li>
+  <li>
+    <input name="state" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.address.state" ng-pattern="ds.text" placeholder="State" uib-tooltip="{{ds.getMessage(lf.state, 'State')}}" />
+  </li>
+  <li>
+    <select class="form-control" name="country" required ng-model="entity.address.countryCode" uib-tooltip="{{ds.getMessage(lf.country, 'Country')}}">
+      <option value="">please select a country</option>
+      <option ng-repeat="i in ds.countries" value="{{i.text}}">{{i.text}}</option>
+    </select>
+  </li>
+  <li>
+    <input name="zip" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="20" ng-model="entity.address.zip" ng-pattern="ds.zip" placeholder="zip" uib-tooltip="{{ds.getMessage(lf.zip, 'Zip')}}" />
+  </li>
+</ul>

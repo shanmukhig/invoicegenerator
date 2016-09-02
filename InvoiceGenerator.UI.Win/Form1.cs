@@ -37,14 +37,15 @@ namespace InvoiceGenerator.UI.Win
       IEnumerable<Invoice> invoices = dataProvider.ReadInvoices();
       IEnumerable<Customer> customers = dataProvider.ReadCustomers().ToList();
       IEnumerable<Company> companies = dataProvider.ReadCompanies().ToList();
+      IEnumerable<Product> products = dataProvider.ReadProducts().ToList();
 
-      InvoiceProcessor processor = new InvoiceProcessor(dataProvider, rootPath);
+      InvoiceProcessor processor = new InvoiceProcessor(rootPath);
 
       foreach (var invoice in invoices)
       {
         var customer = customers.Single(x => x.Id == invoice.CustomerId);
 
-        processor.GetPdfFile(invoice, companies.Single(x => x.Id == invoice.CompanyId), customer);
+        processor.GetPdfFile(invoice, companies.Single(x => x.Id == invoice.CompanyId), customer, products);
 
         MessageBox.Show("Successflly completed generating all invoices", "Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

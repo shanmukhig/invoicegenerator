@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceGenerator.Entities",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceGenerator.UI.Win", "InvoiceGenerator.UI.Win\InvoiceGenerator.UI.Win.csproj", "{14CDF7C1-35B6-4480-9B36-B86CBE03662C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceGenerator.API.Tests", "InvoiceGenerator.API.Tests\InvoiceGenerator.API.Tests.csproj", "{9FB8A74B-D899-4D68-9AEF-792DDAAA3009}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{14CDF7C1-35B6-4480-9B36-B86CBE03662C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14CDF7C1-35B6-4480-9B36-B86CBE03662C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14CDF7C1-35B6-4480-9B36-B86CBE03662C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB8A74B-D899-4D68-9AEF-792DDAAA3009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB8A74B-D899-4D68-9AEF-792DDAAA3009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB8A74B-D899-4D68-9AEF-792DDAAA3009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB8A74B-D899-4D68-9AEF-792DDAAA3009}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

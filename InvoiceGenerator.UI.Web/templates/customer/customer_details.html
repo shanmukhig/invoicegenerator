@@ -1,17 +1,17 @@
 <link rel="stylesheet" href="content/bootstrap-iconpicker.min.css" />
-<ul class="list-group">
-  <li class="list-group-item">
+<ul class="nav nav-stacked-input">
+  <li>
     <input name="customerName" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.customerName" required ng-pattern="ds.text" placeholder="customer name" uib-tooltip="{{ds.getMessage(lf.customerName, 'Customer Name')}}"
     />
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="contactName" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.contactName" ng-pattern="ds.text" placeholder="contact person" uib-tooltip="{{ds.getMessage(lf.contactName, 'Contact Person')}}"
     />
   </li>
-  <li class="list-group-item">
+  <li>
     <button class="btn btn-default currencypicker" name="currency-picker" icon="fa-inr" ng-model="entity.currency" role="iconpicker" uib-tooltip="{{ds.getMessage(lf.currency, 'Currency')}}"></button>
   </li>
-  <li class="list-group-item">
+  <li>
     <input name="comments" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.comments" ng-pattern="ds.text" placeholder="comments" uib-tooltip="{{ds.getMessage(lf.comments, 'Comments')}}" />
   </li>
 </ul>

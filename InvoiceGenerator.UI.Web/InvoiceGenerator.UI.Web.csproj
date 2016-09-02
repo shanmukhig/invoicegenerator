@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -44,16 +44,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="content\animate.css" />
     <Content Include="content\bootstrap-iconpicker.min.css" />
     <Content Include="content\bootstrap.min.css" />
     <Content Include="content\font-awesome.min.css" />
+    <Content Include="content\theme.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\imprima-v4-latin-regular.svg" />
     <Content Include="packages.config" />
@@ -74,45 +76,54 @@
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\bootstrap-iconpicker.js" />
     <Content Include="scripts\bootstrap-iconpicker.min.js" />
+    <Content Include="scripts\bootstrap-notify.js" />
     <Content Include="scripts\bootstrap.min.js" />
-    <Content Include="scripts\create_customer.js" />
-    <Content Include="scripts\create_payment.js" />
     <Content Include="scripts\data_service.js" />
     <Content Include="scripts\iconset-fontawesome-4.0.0.min.js" />
     <Content Include="scripts\jquery.min.js" />
     <Content Include="scripts\main_page.js" />
-    <Content Include="scripts\modal_window.js" />
+    <Content Include="scripts\modal_window_company.js" />
+    <Content Include="scripts\modal_window_customer.js" />
     <Content Include="scripts\modal_window_invoice.js" />
-    <Content Include="scripts\modal_window_payments.js" />
+    <Content Include="scripts\modal_window_payment.js" />
+    <Content Include="scripts\modal_window_product.js" />
     <Content Include="scripts\ng-file-upload-shim.min.js" />
     <Content Include="scripts\ng-file-upload.min.js" />
-    <Content Include="scripts\payments.js" />
     <Content Include="scripts\ui-bootstrap-tpls-1.3.3.js" />
-    <Content Include="templates\address.html" />
-    <Content Include="templates\busy.html" />
-    <Content Include="templates\companies.html" />
-    <Content Include="templates\create_company.html" />
-    <Content Include="templates\create_customer.html" />
-    <Content Include="templates\create_payment.html" />
-    <Content Include="templates\create_product.html" />
-    <Content Include="templates\customers.html" />
+    <Content Include="templates\common\address.html" />
+    <Content Include="templates\common\add_item_toolbar.html" />
+    <Content Include="templates\common\busy.html" />
+    <Content Include="templates\common\communication.html" />
+    <Content Include="templates\common\dashboard.html" />
+    <Content Include="templates\common\norecords.html" />
+    <Content Include="templates\common\popup_toolbar.html" />
+    <Content Include="templates\company\companies.html" />
+    <Content Include="templates\company\company_details.html" />
+    <Content Include="templates\company\create_company.html" />
+    <Content Include="templates\company\neft.html" />
+    <Content Include="templates\company\support.html" />
+    <Content Include="templates\company\swift.html" />
+    <Content Include="templates\company\tax.html" />
+    <Content Include="templates\customer\create_customer.html" />
+    <Content Include="templates\bill\create_payment.html" />
+    <Content Include="templates\product\create_product.html" />
+    <Content Include="templates\customer\customers.html" />
     <Content Include="templates\customer\customer_details.html" />
     <Content Include="templates\customer\customer_tax_details.html" />
-    <Content Include="templates\invoices.html" />
-    <Content Include="templates\create_invoice.html" />
+    <Content Include="templates\invoice\invoices.html" />
+    <Content Include="templates\invoice\create_invoice.html" />
     <Content Include="templates\invoice\company_customer.html" />
     <Content Include="templates\invoice\product_details.html" />
-    <Content Include="templates\main_page.html" />
-    <Content Include="templates\payments.html" />
-    <Content Include="templates\products.html" />
-    <Content Include="templates\toolbar.html" />
+    <Content Include="templates\common\item_toolbar.html" />
+    <Content Include="templates\common\main_page.html" />
+    <Content Include="templates\bill\payments.html" />
+    <Content Include="templates\product\products.html" />
+    <Content Include="templates\common\toolbar.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="templates\company\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -142,8 +153,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
