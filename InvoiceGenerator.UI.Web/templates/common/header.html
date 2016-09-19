@@ -1,0 +1,4 @@
+<div class="pull-right">
+  <span ng-show="isAuthenticated">Hello, {{name}}</span>
+  <button class="button btn btnx" ng-click="signinout()"><i class="fa fa-lg" ng-class="{'fa-sign-in':!isAuthenticated, 'fa-sign-out':isAuthenticated}"></i> {{isAuthenticated ? 'Sign out' : 'Sign-in'}}</button>
+</div>

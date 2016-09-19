@@ -87,12 +87,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InvoiceGenerator.Entities\InvoiceGenerator.Entities.csproj">
-      <Project>{8CF97004-6B0F-4366-8B0A-1E61F0E02D02}</Project>
-      <Name>InvoiceGenerator.Entities</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="templates\fonts\imprima-v4-latin-regular.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -112,7 +106,12 @@
       <DependentUpon>template.html</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\InvoiceGenerator.Entities\InvoiceGenerator.Entities.csproj">
+      <Project>{8CF97004-6B0F-4366-8B0A-1E61F0E02D02}</Project>
+      <Name>InvoiceGenerator.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

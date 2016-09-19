@@ -41,12 +41,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InvoiceGenerator.Entities\InvoiceGenerator.Entities.csproj">
-      <Project>{8CF97004-6B0F-4366-8B0A-1E61F0E02D02}</Project>
-      <Name>InvoiceGenerator.Entities</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="MongoDB.Bson, Version=2.3.0.149, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MongoDB.Bson.2.3.0-rc1\lib\net45\MongoDB.Bson.dll</HintPath>
       <Private>True</Private>
@@ -63,6 +57,12 @@
       <HintPath>..\packages\MongoDB.Driver.GridFS.2.3.0-rc1\lib\net45\MongoDB.Driver.GridFS.dll</HintPath>
       <Private>True</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InvoiceGenerator.Entities\InvoiceGenerator.Entities.csproj">
+      <Project>{8CF97004-6B0F-4366-8B0A-1E61F0E02D02}</Project>
+      <Name>InvoiceGenerator.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

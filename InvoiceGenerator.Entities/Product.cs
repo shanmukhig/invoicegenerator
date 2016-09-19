@@ -1,5 +1,8 @@
-﻿namespace InvoiceGenerator.Entities
+﻿using FluentValidation.Attributes;
+
+namespace InvoiceGenerator.Entities
 {
+  [Validator(typeof(ProductValidator))]
   public class Product : BaseEntity
   {
     public string ProductName { get; set; }

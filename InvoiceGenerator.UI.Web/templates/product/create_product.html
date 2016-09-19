@@ -10,13 +10,13 @@
       </div>
       <span class="span-format-sm cap">{{tabName}} details</span>
     </div>
-    <div class="x-content">
+    <div class="x_content">
       <ul class="nav nav-stacked-input">
         <li>
           <input name="productName" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.productName" required ng-pattern="ds.text" placeholder="product name" uib-tooltip="{{ds.getMessage(lf.productName, 'Product Name')}}" />
         </li>
         <li>
-          <input name="price" type="number" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.price" ng-pattern="ds.decimal" placeholder="price/unit/month" uib-tooltip="{{ds.getMessage(lf.price, 'Price')}}"/>
+          <input name="price" type="number" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.price" ng-pattern="ds.decimal" placeholder="price/unit/month" uib-tooltip="{{ds.getMessage(lf.price, 'Price')}}" />
         </li>
         <li>
           <input name="quantity" required type="number" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.quantity" ng-pattern="ds.integer" placeholder="available quantity" uib-tooltip="{{ds.getMessage(lf.quantity, 'Quantity')}}" />

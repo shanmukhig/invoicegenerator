@@ -1,7 +1,9 @@
 ﻿using System;
+using FluentValidation.Attributes;
 
 namespace InvoiceGenerator.Entities
 {
+  [Validator(typeof(PaymentValidator))]
   public class Payment : BaseEntity
   {
     public string InvoiceId { get; set; }

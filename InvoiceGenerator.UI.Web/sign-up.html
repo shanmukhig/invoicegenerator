@@ -1,0 +1,40 @@
+<selection class="body-sign">
+  <div class="center-sign">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <div class="x_panel">
+          <div class="x_title">
+            <span class="span-format">Sign up</span>
+          </div>
+          <div class="x_content">
+            <div ng-include="'templates/common/busy.html'" ng-show="isBusy"></div>
+            <div class="x_panel x_panel_noborder">
+              <div class="x_content">
+                <form name="signup" novalidate ng-submit="register()">
+                  <div class="row" ng-show="!isBusy">
+                    <ul class="nav nav-stacked-input">
+                      <li><input name="username" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="user.username" required ng-pattern="data.text" placeholder="username" uib-tooltip="{{data.getMessage(signup.username, 'User name')}}"
+                        /></li>
+                      <li><input name="email" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="user.email" required ng-pattern="data.email" placeholder="email" uib-tooltip="{{data.getMessage(signup.email, 'Email')}}" /></li>
+                      <li><input name="password" type="password" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="user.password" required ng-pattern="data.text" placeholder="password" uib-tooltip="{{data.getMessage(signup.password, 'Password')}}"
+                        /></li>
+                      <li>
+                        <input name="confirmpassword" type="password" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="user.confirm_password" required ng-pattern="data.text" placeholder="confirm password" uib-tooltip="{{getMessageAndVerify(signup.confirmpassword, 'Confirm Password')}}"
+                        />
+                      </li>
+                      <!--<li><i class="fa fa-lg " ng-class="{'fa-square':!user.remember, 'fa-check-square':user.remember}" ng-click="user.remember=!user.remember" /> Remember Me</li>-->
+                      <li class="text-right">
+                        <button type="submit" class="btn btn-default" ng-disabled="signup.$invalid"><i class="fa fa-user-plus fa-fw"></i> Sign Up</button>
+                      </li>
+                      <li class="text-center"><span>Already have an account? <a href="#signin">Sign in!</a></span></li>
+                    </ul>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</selection>

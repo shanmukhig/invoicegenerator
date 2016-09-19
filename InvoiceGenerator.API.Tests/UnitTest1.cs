@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using InvoiceGenerator.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -119,5 +120,21 @@ namespace InvoiceGenerator.API.Tests
 
       string pdfFile = processor.GetPdfFile(invoice, company, customer, products);
     }
+
+    [TestMethod]
+    public void MyTestMethod()
+    {
+      string str = "data:image/png;base64,iVBORw0KGgo";
+
+      string replace = str.Split(';')[0].Replace("data:image/", string.Empty);
+
+      Regex regex = new Regex("/*;");
+      MatchCollection matches = regex.Matches(str);
+      foreach (Match match in matches)
+      {
+        
+      }
+    }
+
   }
 }

@@ -10,7 +10,7 @@
       </div>
       <span class="span-format-sm cap">{{tabName}} details</span>
     </div>
-    <div class="x-content">
+    <div class="x_content">
       <ul class="nav nav-stacked-input">
         <li>
           <select class="form-control" name="invoiceNo" required ng-model="entity.invoiceId" ng-change="setCurrency()" uib-tooltip="{{ds.getMessage(lf.invoiceNo, 'Invoice Number')}}">
@@ -26,10 +26,8 @@
         </li>
         <li>
           <div class="input-group" uib-tooltip="{{ds.getMessage(lf.paymentDate, 'Payment Date')}}">
-            <input type="text" name="paymentDate"
-                   class="form-control" ng-model="entity.paymentDate" uib-datepicker-popup="{{ds.dateFormat}}"
-                   is-open="opened" readonly datepicker-options="ds.dateOptions"
-                   required close-text="Close" placeholder="invoice payment date" popup-placement="bottom-right"/>
+            <input type="text" name="paymentDate" class="form-control" ng-model="entity.paymentDate" uib-datepicker-popup="{{ds.dateFormat}}" is-open="opened" readonly datepicker-options="ds.dateOptions" required close-text="Close" placeholder="invoice payment date"
+              popup-placement="bottom-right" />
             <span class="input-group-addon" ng-click="opened=true">
               <i class="fa fa-lg fa-calendar"></i> <i class="fa fa-sm fa-caret-down"></i>
             </span>

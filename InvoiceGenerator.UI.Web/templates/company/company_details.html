@@ -10,7 +10,7 @@
     <button class="btn btn-default currencypicker" name="currency-picker" ng-model="entity.currency" role="iconpicker" uib-tooltip="{{ds.getMessage(lf.currency, 'Currency')}}"></button>
   </li>
   <li>
-    <input name="comments" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.comments" ng-pattern="ds.text" placeholder="comments" uib-tooltip="{{ds.getMessage(lf.comments, ' Comments ')}}"/>
+    <input name="comments" type="text" class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="entity.comments" ng-pattern="ds.text" placeholder="comments" uib-tooltip="{{ds.getMessage(lf.comments, ' Comments ')}}" />
   </li>
   <li>
     <img ng-src="{{entity.logo}}" class="img-thumbnail" ng-show="entity.logo" />

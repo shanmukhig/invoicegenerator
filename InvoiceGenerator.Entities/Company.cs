@@ -1,5 +1,9 @@
-﻿namespace InvoiceGenerator.Entities
+﻿using FluentValidation.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace InvoiceGenerator.Entities
 {
+  [Validator(typeof(CompanyValidator))]
   public class Company : BaseEntity
   {
     public string Currency { get; set; }
@@ -9,8 +13,10 @@
     public Bank Ifsc { get; set; }
     public Bank Swift { get; set; }
     public Bank Cheque { get; set; }
-    public string Logo { get; set; }
     public Support Support { get; set; }
     public string Comments { get; set; }
+    public string FileId { get; set; }
+    //[BsonIgnore]
+    public string Logo { get; set; }
   }
 }

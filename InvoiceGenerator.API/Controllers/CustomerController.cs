@@ -26,17 +26,28 @@ namespace InvoiceGenerator.API.Controllers
       return Ok(await Repository.GetById(id).ConfigureAwait(false));
     }
 
+    [ValiateModalStateFilter]
     [HttpPost]
     [Route("api/customer")]
     public async Task<IHttpActionResult> AddCustomer([FromBody] Customer customer)
     {
+      //if (!Request.Headers.Contains("Authorization"))
+      //{
+      //  return Unauthorized();
+      //}
       return Ok(await Repository.AddOrUpdate(null, customer).ConfigureAwait(false));
     }
 
+    [ValiateModalStateFilter]
     [HttpPut]
     [Route("api/customer/{id}")]
     public async Task<IHttpActionResult> UpdateCustomer([FromUri] string id, [FromBody] Customer customer)
     {
+      //if (!Request.Headers.Contains("Authorization"))
+      //{
+      //  return Unauthorized();
+      //}
+
       return Ok(await Repository.AddOrUpdate(id, customer).ConfigureAwait(false));
     }
 

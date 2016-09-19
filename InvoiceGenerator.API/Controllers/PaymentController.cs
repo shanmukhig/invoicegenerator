@@ -26,6 +26,7 @@ namespace InvoiceGenerator.API.Controllers
       return Ok(await Repository.GetById(id).ConfigureAwait(false));
     }
 
+    [ValiateModalStateFilter]
     [HttpPost]
     [Route("api/payment")]
     public async Task<IHttpActionResult> AddCustomer([FromBody] Payment payment)
@@ -33,6 +34,7 @@ namespace InvoiceGenerator.API.Controllers
       return Ok(await Repository.AddOrUpdate(null, payment).ConfigureAwait(false));
     }
 
+    [ValiateModalStateFilter]
     [HttpPut]
     [Route("api/payment/{id}")]
     public async Task<IHttpActionResult> UpdateCustomer([FromUri] string id, [FromBody] Payment payment)

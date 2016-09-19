@@ -1,18 +1,28 @@
-﻿;(function() {
+﻿;
+(function() {
   'use strict';
 
   var module = angular.module('main_page', ['ngRoute', 'ui.bootstrap', 'ngFileUpload']);
 
   module.config(function($routeProvider) {
-    // $routeProvider.when("/", {
-    //     controller: "vController",
-    //     templateUrl: "templates/dashboard.html"
-    // });
-
-    $routeProvider.when("/",
-    {
+    $routeProvider.when("/", {
       controller: "vController",
       templateUrl: "templates/common/main_page.html"
+    });
+
+    $routeProvider.when("/signin", {
+      controller: "sinController",
+      templateUrl: "sign-in.html"
+    });
+
+    $routeProvider.when("/signup", {
+      controller: "supController",
+      templateUrl: "sign-up.html"
+    });
+
+    $routeProvider.when("/reset", {
+      controller: "resetController",
+      templateUrl: "forgot-password.html"
     });
 
     $routeProvider.otherwise({
@@ -20,16 +30,114 @@
     });
   });
 
-  module.controller('vController',
-  ['$scope', '$http', 'dataService', '$uibModal', '$filter', '$sce',
-    function($scope, $http, dataService, $uibModal, $filter, $sce) {
+  module.controller('resetController', ['$scope', 'dataService',
+    function($scope, dataService) {
       $scope.data = dataService;
-      $scope.sortReverse = false;
-      $scope.searchItem = '';
+      $scope.reset = function() {
+        console.log('reset called');
+      }
+    }
+  ]);
+
+  module.controller('sinController', ['$scope', 'dataService', 'authToken', '$window',
+    function($scope, dataService, authToken, $window) {
+      $scope.data = dataService;
+      $scope.user = {};
+      $scope.login = function() {
+
+        dataService.signinsignout($scope.user, 'user/signin').then(function(data) {
+          authToken.setToken(data.data)
+          if (authToken.isAuthenticated()) {
+            $window.location = $window.location.pathname;
+          }
+        }, function(error) {
+          dataService.notifyError({
+            title: 'Sign in',
+            message: error.status + ' ' + error.statusText
+          });
+        });
+      }
+    }
+  ]);
+
+  module.controller('supController', ['$scope', 'dataService', 'authToken', '$window',
+    function($scope, dataService, authToken, $window) {
+      $scope.data = dataService;
+
+      $scope.register = function() {
+        dataService.signinsignout($scope.user, 'user/signup').then(function(data) {
+          authToken.setToken(data.data);
+          if (authToken.isAuthenticated()) {
+            dataService.notifySuccess({
+              title: 'Sign up',
+              message: 'Sign up successful!'
+            });
+            $window.location = $window.location.pathname;
+          }
+        }, function(reason) {
+          dataService.notifyError({
+            title: 'Sign up',
+            message: reason.state + ' ' + reason.statusText
+          });
+        });
+      }
+
+      $scope.getMessageAndVerify = function(ctrl, message) {
+        if (!$scope.user) {
+          return;
+        }
+        var result = dataService.getMessage(ctrl, message);
+        var suffix = ' valid.';
+        if (result.indexOf(suffix, result.length - suffix.length) !== -1) {
+          if ($scope.user.password !== $scope.user.confirm_password) {
+            return 'Password and Confirm password didn\'t match';
+          }
+        }
+        return result;
+      };
+
+      $scope.login = function() {
+        alert($scope.user.username);
+      }
+    }
+  ]);
+
+  module.controller('vController', ['$scope', 'dataService', '$uibModal', '$filter', '$sce', 'authToken', '$window',
+
+    function($scope, dataService, $uibModal, $filter, $sce, authToken, $window) {
+      $scope.data = dataService;
+      //$scope.sortReverse = false;
+      //$scope.searchItem = '';
       $scope.tab = dataService.tabs[0]; //set this element to chagne default tab. index 0 will show first tab.
+      $scope.isAuthenticated = authToken.isAuthenticated();
+
+      if (!$scope.isAuthenticated) {
+        dataService.notifyError({
+          title: 'Unauthorized',
+          message: 'You are not authorized to access this page'
+        });
+        $window.location = "#signin";
+      } else {
+        $scope.name = authToken.getToken().user.username;
+        dataService.notifySuccess({
+          title: 'Sign in',
+          message: 'Sign in successful!'
+        });
+      }
 
       $scope.getActive = function(item) {
         return item === parseInt($scope.tab.id);
+      }
+
+      $scope.signinout = function() {
+        if (authToken.isAuthenticated()) {
+          authToken.removeToken();
+        }
+        dataService.notifyWarning({
+          title: 'Sign out',
+          message: 'You are successfully logged out'
+        });
+        $window.location = "#signin";
       }
 
       $scope.getItems = function(tab) {
@@ -39,7 +147,11 @@
           .then(function(data) {
               $scope.activeList = data;
             },
-            function() {
+            function(reason) {
+              dataService.notifyError({
+                title: tab.uri + ' details',
+                message: 'Error occured while fetching details from the server'
+              });
               $scope.activeList = [];
             })
           .finally(function() {
@@ -71,8 +183,7 @@
         var entity = {};
 
         if (id) {
-          entity = $filter('filter')($scope.activeList,
-          {
+          entity = $filter('filter')($scope.activeList, {
             id: id
           })[0];
         }
@@ -99,19 +210,21 @@
           }
         });
 
-        var onSaveClicked = function () {
+        var onSaveClicked = function() {
           $scope.isBusy = true;
           dataService.getEntity($scope.tab.id, true)
-            .then(function (data) {
-              $scope.activeList = data;
-            },
-              function (reason) { console.log(reason) })
-            .finally(function () {
+            .then(function(data) {
+                $scope.activeList = data;
+              },
+              function(reason) {
+                console.log(reason)
+              })
+            .finally(function() {
               $scope.isBusy = false;
             });
         };
 
-        var onCloseClicked = function (reason) {
+        var onCloseClicked = function(reason) {
           console.log(reason);
         };
 
@@ -293,11 +406,13 @@
         return e.invoiceHtml;
       }
 
-      $scope.downloadPdf = function (id, invoiceNo) {
-        $scope.isBusy = true;
+      $scope.downloadPdf = function(id, invoiceNo) {
+        $scope.isChildBusy = true;
         dataService.getEntity(6, id)
           .then(function(data) {
-              var file = new Blob([data], { type: 'application/octet-stream' });
+              var file = new Blob([data], {
+                type: 'application/octet-stream'
+              });
               var fileUrl = URL.createObjectURL(file);
               var a = document.createElement('a');
               a.href = fileUrl;
@@ -317,7 +432,7 @@
               });
             })
           .finally(function() {
-            $scope.isBusy = false;
+            $scope.isChildBusy = false;
           });
       }
     }

@@ -1,0 +1,37 @@
+<selection class="body-sign">
+  <div class="center-sign">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <div class="x_panel">
+          <div class="x_title">
+            <span class="span-format">Sign in</span>
+          </div>
+          <div class="x_content">
+            <div ng-include="'templates/common/busy.html'" ng-show="isBusy"></div>
+            <div class="x_panel x_panel_noborder">
+              <div class="x_content">
+                <form name="frmSignin" novalidate ng-submit="login()">
+                  <div class="row" ng-show="!isBusy">
+                    <ul class="nav nav-stacked-input">
+                      <li>
+                        <input name="username" type="text" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="user.username" ng-pattern="data.text" placeholder="username" uib-tooltip="{{data.getMessage(frmSignin.username, 'User name')}}" />
+                      </li>
+                      <li>
+                        <input name="password" type="password" required class="form-control" ng-disabled="isBusy" ng-maxlength="100" ng-model="user.password" ng-pattern="data.text" placeholder="password" uib-tooltip="{{data.getMessage(frmSignin.password, 'Password')}}" />
+                      </li>
+                      <li><i class="fa fa-lg fa-fw " ng-class="{'fa-square-o':!user.remember, 'fa-check-square-o':user.remember}" ng-click="user.remember=!user.remember" /> Remember Me</li>
+                      <li class="text-right">
+                        <button type="submit" class="btn btn-default" ng-disabled="frmSignin.$invalid"><i class="fa fa-sign-in"></i> Sign in</button>
+                      </li>
+                      <li class="text-center"><span>Forgot password? <a href="#reset">Reset!</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<span>Don't have an account yet? <a href="#signup">Sign up!</a></span></li>
+                    </ul>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</selection>

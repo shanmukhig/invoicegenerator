@@ -1,117 +1,176 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Security.Principal;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 using InvoiceGenerator.Data;
 using InvoiceGenerator.Entities;
+using Newtonsoft.Json;
+using StructureMap.Attributes;
 
 namespace InvoiceGenerator.API.Controllers
 {
-  //public class MultiPartMediaTypeFormatter : MediaTypeFormatter
-  //{
-  //  public MultiPartMediaTypeFormatter()
-  //  {
-  //    SupportedMediaTypes.Add(new MediaTypeHeaderValue("multipart/form-data"));
-  //  }
-  //  public override bool CanReadType(Type type)
-  //  {
-  //    return true;
-  //  }
+  public class ApiAuthorizeAttribute : AuthorizeAttribute
+  {
+    [SetterProperty]
+    public IHashHelper HashHelper { get; set; }
 
-  //  public override bool CanWriteType(Type type)
-  //  {
-  //    return true;
-  //  }
+    //public override bool AllowMultiple => false;
 
-  //  public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
-  //  {
-  //    if (type == (Type)null)
-  //      throw new ArgumentNullException(nameof(type));
-  //    if (readStream == null)
-  //      throw new ArgumentNullException(nameof(readStream));
+    //public override void OnAuthorization(HttpActionContext actionContext)
+    //{
+    //  base.OnAuthorization(actionContext);
+    //}
 
-  //    return Task.FromResult<object>(new Company());
+    //public override Task OnAuthorizationAsync(HttpActionContext actionContext, CancellationToken cancellationToken)
+    //{
+    //  return base.OnAuthorizationAsync(actionContext, cancellationToken);
+    //}
 
-  //    //if (effectiveEncoding == null)
-  //    //  throw Error.ArgumentNull("effectiveEncoding");
-  //    //if (!this.UseDataContractJsonSerializer)
-  //    //  return base.ReadFromStream(type, readStream, effectiveEncoding, formatterLogger);
-  //    //using (XmlReader reader = (XmlReader)JsonReaderWriterFactory.CreateJsonReader((Stream)new NonClosingDelegatingStream(readStream), effectiveEncoding, this._readerQuotas, (OnXmlDictionaryReaderClose)null))
-  //    //  return this.GetDataContractSerializer(type).ReadObject(reader);
-  //  }
+    protected override bool IsAuthorized(HttpActionContext actionContext)
+    {
+      AuthenticationHeaderValue value = actionContext.Request.Headers.Authorization;
+      if (string.IsNullOrWhiteSpace(value?.Parameter) || string.IsNullOrWhiteSpace(value.Scheme) || !value.Scheme.Equals("Bearer", StringComparison.InvariantCultureIgnoreCase))
+      {
+        return base.IsAuthorized(actionContext);
+      }
 
-  //  public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger,
-  //    CancellationToken cancellationToken)
-  //  {
-  //    if (type == (Type)null)
-  //      throw new ArgumentNullException(nameof(type));
-  //    if (readStream == null)
-  //      throw new ArgumentNullException(nameof(readStream));
+      var segments = value.Parameter.Split('.');
 
-  //    return Task.FromResult<object>(new Company());
-  //    //return base.ReadFromStreamAsync(type, readStream, content, formatterLogger, cancellationToken);
-  //  }
+      if (segments.Length != 3)
+      {
+        return base.IsAuthorized(actionContext);
+      }
 
-  //  public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
-  //  {
-  //    return base.WriteToStreamAsync(type, value, writeStream, content, transportContext);
-  //  }
+      string signature = HashHelper.Decode(segments, "secret");
 
-  //  public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext, CancellationToken cancellationToken)
-  //  {
-  //    return base.WriteToStreamAsync(type, value, writeStream, content, transportContext, cancellationToken);
-  //  }
-  //}
+      if (!string.Equals(signature, value.Parameter))
+      {
+        return base.IsAuthorized(actionContext);
+      }
 
-  //public class PhotoMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
-  //{
+      IEnumerable<Claim> claims = new List<Claim>
+      {
+        new Claim("claim1", "claim1")
+      };
 
-  //  public PhotoMultipartFormDataStreamProvider(string path) : base(path)
-  //  {
-  //  }
+      IIdentity identity = new GenericIdentity(string.Empty);
+      IPrincipal principal = new GenericPrincipal(identity, new string[] {});
+      Thread.CurrentPrincipal = principal;
+      if (System.Web.HttpContext.Current != null)
+      {
+        System.Web.HttpContext.Current.User = principal;
+      }
 
-  //  public override string GetLocalFileName(System.Net.Http.Headers.HttpContentHeaders headers)
-  //  {
-  //    //Make the file name URL safe and then use it & is the only disallowed url character allowed in a windows filename 
-  //    var name = !string.IsNullOrWhiteSpace(headers.ContentDisposition.FileName)
-  //      ? headers.ContentDisposition.FileName
-  //      : "NoName";
-  //    return name.Trim(new char[] {'"'})
-  //      .Replace("&", "and");
-  //  }
-  //}
+      return true;
+    }
+  }
 
   public class CompanyController : BaseApiController<Company>
   {
     public CompanyController(IRepository<Company> repository) : base(repository)
     {
+      //hashHelper = new HashHelper();
     }
 
+    [ApiAuthorize]
     [HttpGet]
     [Route("api/company")]
     public async Task<IHttpActionResult> GetCompanies()
     {
-      return Ok(await Repository.GetAll().ConfigureAwait(false));
+      IEnumerable<Company> companies = await Repository.GetAll().ConfigureAwait(false);
+
+      //var result = from c in companies
+      //  select new Company
+      //  {
+      //    Id = c.Id,
+      //    Address = c.Address,
+      //    Tax = c.Tax,
+      //    Currency = c.Currency,
+      //    Cheque = c.Cheque,
+      //    Comments = c.Comments,
+      //    CompanyName = c.CompanyName,
+      //    Ifsc = c.Ifsc,
+      //    Support = c.Support,
+      //    Swift = c.Swift
+      //  };
+
+      return Ok(companies);
     }
 
     [HttpGet]
     [Route("api/company/{id}")]
     public async Task<IHttpActionResult> GetCompany(string id)
     {
-      return Ok(await Repository.GetById(id).ConfigureAwait(false));
+      Company company = await Repository.GetById(id).ConfigureAwait(false);
+      //company.Logo = null;
+      return Ok(company);
     }
 
+    [HttpGet]
+    [Route("api/company/logo/{id}")]
+    public async Task<HttpResponseMessage> GetLogo(string id)
+    {
+      byte[] buffer = await Repository.DownloadFileAsync(id).ConfigureAwait(false);
+
+      if (buffer == null || buffer.Length == 0)
+      {
+        return new HttpResponseMessage(HttpStatusCode.NotFound);
+      }
+
+      ContentDispositionHeaderValue value = new ContentDispositionHeaderValue("attachment")
+      {
+        FileName = $"{id}.img"
+      };
+
+      HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.OK)
+      {
+        Content = new ByteArrayContent(buffer)
+      };
+
+      message.Content.Headers.ContentDisposition = value;
+      message.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+
+      return message;
+    }
+
+    [ValiateModalStateFilter]
     [HttpPost]
     [Route("api/company")]
     public async Task<IHttpActionResult> AddCompany([FromBody] Company company)
     {
+
+      //string name = company.Logo.Split(';')[0];
+      //name = $"{company.CompanyName}.{name.Replace("data:image/", string.Empty)}";
+      //company.FileId = await Repository.UploadFileAsync(company.FileId, name, buffer: Encoding.ASCII.GetBytes(company.Logo));
+      //company.Logo = null;
+      await UploadLogo(company);
       return Ok(await Repository.AddOrUpdate(null, company).ConfigureAwait(false));
     }
 
+    private async Task UploadLogo(Company company)
+    {
+      string name = company.Logo.Split(';')[0];
+      name = $"{company.CompanyName}.{name.Replace("data:image/", string.Empty)}";
+      company.FileId = await Repository.UploadFileAsync(company.FileId, name, buffer: Encoding.ASCII.GetBytes(company.Logo));
+      company.Logo = null;
+    }
+
+    [ValiateModalStateFilter]
     [HttpPut]
     [Route("api/company/{id}")]
     public async Task<IHttpActionResult> UpdateCompany([FromUri] string id, [FromBody] Company company)
     {
+      await UploadLogo(company);
       return Ok(await Repository.AddOrUpdate(id, company).ConfigureAwait(false));
     }
 

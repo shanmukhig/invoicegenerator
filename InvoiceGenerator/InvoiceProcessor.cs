@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing.Text;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using BillGenerator;
 using InvoiceGenerator.Entities;
@@ -128,19 +126,6 @@ namespace InvoiceGenerator
     //}
 
   }
-
-  //public class PdfSharpInvoiceProcessor : IInvoiceProcessor
-  //{
-  //  public string GetPdfFile(Invoice i, Company company, Customer customer, IEnumerable<Product> products)
-  //  {
-  //    throw new NotImplementedException();
-  //  }
-
-  //  public MemoryStream GetPdfStream(Invoice i, Company company, Customer customer, IEnumerable<Product> products)
-  //  {
-  //    throw new NotImplementedException();
-  //  }
-  //}
 
   public class InvoiceProcessor : IInvoiceProcessor
   {

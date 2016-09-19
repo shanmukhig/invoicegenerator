@@ -5,7 +5,7 @@
       <div ng-include="'templates/common/toolbar.html'"></div>
     </div>
   </div>
-  <div class="x-content">
+  <div class="x_content">
     <div ng-include="'templates/common/busy.html'" ng-show="isBusy"></div>
     <div class="row" ng-show="!isBusy">
       <div ng-include="'templates/common/norecords.html'" ng-show="activeList.length == 0"></div>
@@ -19,7 +19,7 @@
             <div class="row">
               <div class="col-sm-7 border-right">
                 <div class="description-block">
-                  <h5 class="description-header">{{i.paymentDate|date:data.dateFormat}}</h5>
+                  <h5 class="description-header">{{i.paymentDate|date:data.shortDateFormat}}</h5>
                   <span class="description-text">Payment Date</span>
                 </div>
               </div>

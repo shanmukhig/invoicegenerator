@@ -25,6 +25,7 @@ namespace InvoiceGenerator.API.Controllers
       return Ok(await Repository.GetById(id).ConfigureAwait(false));
     }
 
+    [ValiateModalStateFilter]
     [HttpPost]
     [Route("api/product")]
     public async Task<IHttpActionResult> AddCompany([FromBody] Product product)
@@ -32,6 +33,7 @@ namespace InvoiceGenerator.API.Controllers
       return Ok(await Repository.AddOrUpdate(null, product).ConfigureAwait(false));
     }
 
+    [ValiateModalStateFilter]
     [HttpPut]
     [Route("api/product/{id}")]
     public async Task<IHttpActionResult> UpdateCompany([FromUri] string id, [FromBody] Product product)

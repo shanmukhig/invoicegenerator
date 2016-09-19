@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using FluentValidation.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace InvoiceGenerator.Entities
 {
-    public enum BillingFrequency
+  public enum BillingFrequency
   {
     Other = 0,
     Monthly = 1,
@@ -13,6 +14,7 @@ namespace InvoiceGenerator.Entities
     Yearly = 12
   }
 
+  [Validator(typeof(InvoiceValidator))]
   public class Invoice : BaseEntity
   {
     public string InvoiceNo { get; set; }
@@ -28,10 +30,10 @@ namespace InvoiceGenerator.Entities
     public decimal Adjustments { get; set; } //C
     public string Currency { get; set; }
 
-    [BsonIgnore]
+    //[BsonIgnore]
     public string FileId { get; set; }
 
-    public byte[] PdfStream { get; set; }
+    //public byte[] PdfStream { get; set; }
 
     [BsonIgnore]
     public string SummaryOfAccounts { get; set; }

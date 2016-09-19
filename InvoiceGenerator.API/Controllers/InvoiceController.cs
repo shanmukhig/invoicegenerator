@@ -64,35 +64,30 @@ namespace InvoiceGenerator.API.Controllers
           PreviousPayment = i.PreviousPayment,
           Adjustments = i.Adjustments,
           Currency = i.Currency,
-          TotalDue = i.TotalDue
+          TotalDue = i.TotalDue,
+          FileId = i.FileId
         });
-
-      //return Ok(map);
     }
 
     [HttpGet]
     [Route("api/invoice/pdf/{id}")]
     public async Task<HttpResponseMessage> GetPdf(string id)
     {
-      Invoice invoice = await Repository.GetById(id).ConfigureAwait(false);
+      byte[] buffer = await Repository.DownloadFileAsync(id);
 
-      if (invoice.PdfStream == null)
+      if (buffer == null || buffer.Length == 0)
       {
         return new HttpResponseMessage(HttpStatusCode.NotFound);
       }
 
-      //File.WriteAllBytes($@"C:\temp\{invoice.Id}.pdf", invoice.PdfStream);
-
-      //return Ok(invoice.PdfStream);
-
       ContentDispositionHeaderValue value = new ContentDispositionHeaderValue("attachment")
       {
-        FileName = invoice.InvoiceNo + ".pdf"
+        FileName = $"{id}.pdf"
       };
 
       HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.OK)
       {
-        Content = new ByteArrayContent(invoice.PdfStream)
+        Content = new ByteArrayContent(buffer)
       };
 
       message.Content.Headers.ContentDisposition = value;
@@ -106,10 +101,10 @@ namespace InvoiceGenerator.API.Controllers
     public async Task<IHttpActionResult> GetInvoice(string id)
     {
       Invoice invoice = await Repository.GetById(id).ConfigureAwait(false);
-      invoice.PdfStream = null;
       return Ok(invoice);
     }
 
+    [ValiateModalStateFilter]
     [HttpPost]
     [Route("api/invoice")]
     public async Task<IHttpActionResult> AddInvoice([FromBody] Invoice invoice)
@@ -118,11 +113,11 @@ namespace InvoiceGenerator.API.Controllers
       return Ok(await Repository.AddOrUpdate(null, invoice).ConfigureAwait(false));
     }
 
+    [ValiateModalStateFilter]
     [HttpPut]
     [Route("api/invoice/{id}")]
     public async Task<IHttpActionResult> UpdateInvoice([FromUri] string id, [FromBody] Invoice invoice)
     {
-      //await GetInvoiceNo(invoice);
       await GenerateInvoice(invoice);
       return Ok(await Repository.AddOrUpdate(id, invoice).ConfigureAwait(false));
     }
@@ -134,11 +129,7 @@ namespace InvoiceGenerator.API.Controllers
       Customer customer = await this.customeRepository.GetById(invoice.CustomerId);
 
       MemoryStream stream = invoiceProcessor.GetPdfStream(invoice, company, customer, products);
-      stream.Position = 0;
-      invoice.PdfStream = new byte[stream.Length];
-      await stream.ReadAsync(invoice.PdfStream, 0, (int)stream.Length);
-
-      //string pdfFile = invoiceProcessor.GetPdfFile(invoice, company, customer, products);
+      invoice.FileId = await Repository.UploadFileAsync(invoice.FileId, $"{invoice.InvoiceNo}.pdf", stream);
     }
 
     [HttpDelete]
